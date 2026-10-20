@@ -316,6 +316,10 @@ is asynchronous: committed queued work is not proof that rendered files refreshe
 - Keyword-rule names incorporate authoring ID and effective category code/name;
   their trigger is document-added and order 100. Explicit starters retain list
   order. Changing a template ID is not an upgrade mechanism for existing rules.
+  If two rules to be added share an effective name, Preview MUST reject the
+  proposal with the conflicting name and actionable guidance to rename the
+  explicit starter or remove category keywords. Existing-name preservation and
+  skipped rules do not participate in this planned-addition collision check.
 
 Neutral bootstrap replacement is a narrow initial-setup exception, not a general
 reset: no document, including Trash, may be in an unprotected category; the target
@@ -341,8 +345,11 @@ The final component MUST also fit positive signed 64-bit range:
 **1–9,223,372,036,854,775,807**. It is the existing installation-global
 `documents.id`, across all systems—not a category-local folder counter, authored
 seed ID or new namespace-local ID. IDs need not be consecutive; automatic
-allocation does not reuse purged numbers. New versions and split children receive
-their own document IDs under Suchi's existing behavior.
+allocation does not reuse IDs allocated after the taxonomy schema upgrade.
+Surviving beta.2 IDs are preserved. Numbers purged before that upgrade have no
+retained allocation history and may be reused; the nonreuse guarantee is
+prospective. New versions and split children receive their own document IDs under
+Suchi's existing behavior.
 
 All addresses below are illustrative and assume Suchi has **already returned** the
 stated document IDs; no authoring file reserves them:
@@ -429,8 +436,12 @@ updates, automations, sidecars or taxonomy import. Version/split/email families
 inherit system ownership. A same-user membership in two systems does not make
 foreign category/tag/type IDs valid metadata assignments. The deliberate exception
 is an authenticated document-link write: the actor must be allowed to change the
-source and view the target in their respective systems; inaccessible link targets
-are redacted on read. Actorless automation links remain same-system only.
+source and view the target in their respective systems. Actorless automation
+links remain same-system only. Per-document custom-field values currently have no
+API/UI read projection; field-definition listing is a separate capability. Before
+adding a value read projection, the implementation MUST recheck target visibility
+and redact inaccessible document links. Read-time redaction is not claimed as an
+implemented v1 capability.
 
 A share contains documents from one system and remains a deliberate bearer
 credential; public access rechecks the creator's active system entry and current
