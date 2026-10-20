@@ -1,6 +1,6 @@
 # Cross-border and expat household
 
-[HuML file](global-expat.huml)
+[HuML file](global-expat.huml) · [Equivalent TOML](global-expat.toml) · [Normative reference](../taxonomy-spec.md)
 
 Keep civil records, residence evidence and work permissions alongside family applications and status decisions. Family members and authorities are correspondents; the tree records evidence without predicting eligibility, deadlines or whether a document is still valid.
 

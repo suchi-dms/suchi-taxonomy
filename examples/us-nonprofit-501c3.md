@@ -1,6 +1,6 @@
 # US nonprofit 501(c)(3)
 
-[HuML file](us-nonprofit-501c3.huml)
+[HuML file](us-nonprofit-501c3.huml) · [Equivalent TOML](us-nonprofit-501c3.toml) · [Normative reference](../taxonomy-spec.md)
 
 Keep federal status evidence, governance decisions and fundraising records in a tree the next treasurer can understand. Donors and grantmakers remain correspondents; this example does not decide filing duties or guarantee continued exemption.
 

@@ -1,0 +1,68 @@
+format = "suchi-taxonomy/v1"
+id = "de-household"
+language = "de"
+license = "CC0-1.0"
+market = "eu-de"
+name = "Deutscher Haushalt"
+story = "Ausweise, Steuerbescheide und Wohnunterlagen bekommen feste Plätze, die auch beim Umzug verständlich bleiben. Personen, Arbeitgeber und Anbieter werden als Korrespondenten erfasst; Fristen und Zugriffsrechte werden außerhalb dieser Vorlage geprüft."
+version = 1
+
+[[areas]]
+  code = 10
+  name = "Persönliches"
+
+  [[areas.categories]]
+    code = 11
+    name = "Ausweise und Urkunden"
+    description = "Identitätsdokumente und standesamtliche Urkunden; Personen als Korrespondenten führen."
+    keywords = ["Geburtsurkunde", "Personalausweis"]
+
+  [[areas.categories]]
+    code = 12
+    name = "Gesundheit"
+    description = "Arztbriefe, Befunde und Abrechnungen; sensible Zugriffe separat regeln."
+    keywords = ["Arztbrief", "Laborbefund"]
+
+[[areas]]
+  code = 20
+  name = "Geld"
+
+  [[areas.categories]]
+    code = 21
+    name = "Steuerbescheide"
+    description = "Steuererklärungen, Bescheide und zugehörige Nachweise."
+    keywords = ["Einkommensteuerbescheid"]
+
+  [[areas.categories]]
+    code = 22
+    name = "Versicherungen"
+    description = "Versicherungsscheine, Beitragsrechnungen und Schadenunterlagen."
+    keywords = ["Versicherungsschein", "Beitragsrechnung"]
+
+  [[areas.categories]]
+    code = 23
+    name = "Bank und Verträge"
+    description = "Kontoauszüge und Finanzverträge."
+    keywords = ["Kontoauszug", "Darlehensvertrag"]
+
+  [[areas.categories]]
+    code = 24
+    name = "Rente"
+    description = "Renteninformationen, Versicherungsverläufe und Rentenbescheide."
+    keywords = ["Renteninformation", "Versicherungsverlauf"]
+
+[[areas]]
+  code = 30
+  name = "Wohnen"
+
+  [[areas.categories]]
+    code = 31
+    name = "Mietvertrag und Nebenkosten"
+    description = "Mietverträge, Übergabeprotokolle und Betriebskostenabrechnungen."
+    keywords = ["Betriebskostenabrechnung", "Wohnungsübergabeprotokoll"]
+
+  [[areas.categories]]
+    code = 32
+    name = "Strom und Internet"
+    description = "Versorgungsverträge, Rechnungen und Kündigungsbestätigungen."
+    keywords = ["Stromabrechnung", "Internetvertrag"]

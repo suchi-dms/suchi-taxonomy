@@ -1,6 +1,6 @@
 # Deutscher Verein
 
-[HuML file](de-verein.huml)
+[HuML file](de-verein.huml) · [Equivalent TOML](de-verein.toml) · [Normative reference](../taxonomy-spec.md)
 
 Satzung, Registerunterlagen und Vorstandsentscheidungen bleiben beim Vorstandswechsel auffindbar. Mitgliedsanträge, Beitragsnachweise und Förderunterlagen erhalten eigene Dokumentkategorien; Mitglieder werden nicht zu immer neuen Kategorien.
 

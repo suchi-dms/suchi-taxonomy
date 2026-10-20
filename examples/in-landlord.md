@@ -1,6 +1,6 @@
 # Indian residential landlord
 
-[HuML file](in-landlord.huml)
+[HuML file](in-landlord.huml) · [Equivalent TOML](in-landlord.toml) · [Normative reference](../taxonomy-spec.md)
 
 Keep ownership papers, society correspondence and tenancy evidence in stable document-kind categories. Properties and tenants stay in correspondents so another letting does not require renumbering the archive.
 

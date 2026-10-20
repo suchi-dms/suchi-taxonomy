@@ -1,6 +1,6 @@
 # Indian NGO and FCRA administration
 
-[HuML file](in-ngo-fcra.huml)
+[HuML file](in-ngo-fcra.huml) · [Equivalent TOML](in-ngo-fcra.toml) · [Normative reference](../taxonomy-spec.md)
 
 Separate registration and annual filing evidence from funding agreements and program reports. Donors and programs are correspondents, while the filing tree stays usable when the board or funding mix changes.
 

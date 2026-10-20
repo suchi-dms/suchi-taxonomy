@@ -1,0 +1,68 @@
+format = "suchi-taxonomy/v1"
+id = "us-small-landlord"
+language = "en"
+license = "CC0-1.0"
+market = "us"
+name = "US small landlord"
+story = "Keep deeds, insurance and repair evidence separate from leases, deposits and rental income records. Properties and tenants are correspondents; state and local requirements need separate review before relying on any document list."
+version = 1
+
+[[areas]]
+  code = 10
+  name = "Property records"
+
+  [[areas.categories]]
+    code = 11
+    name = "Deeds and mortgage"
+    description = "Recorded deeds, closing statements and mortgage records."
+    keywords = ["warranty deed", "mortgage statement"]
+
+  [[areas.categories]]
+    code = 12
+    name = "Insurance"
+    description = "Policy schedules, declarations and claim correspondence."
+    keywords = ["insurance declarations", "dwelling policy"]
+
+  [[areas.categories]]
+    code = 13
+    name = "Inspections and repairs"
+    description = "Move-in condition reports, inspections and repair invoices."
+    keywords = ["move-in inspection", "repair work order"]
+
+[[areas]]
+  code = 20
+  name = "Tenancy records"
+
+  [[areas.categories]]
+    code = 21
+    name = "Leases"
+    description = "Executed rental agreements and amendments."
+    keywords = ["residential lease agreement"]
+
+  [[areas.categories]]
+    code = 22
+    name = "Deposits"
+    description = "Deposit receipts, accounting statements and return evidence."
+    keywords = ["security deposit accounting"]
+
+  [[areas.categories]]
+    code = 23
+    name = "Notices"
+    description = "Served tenancy notices and delivery evidence."
+    keywords = ["notice to vacate", "notice of rent increase"]
+
+[[areas]]
+  code = 30
+  name = "Rental money"
+
+  [[areas.categories]]
+    code = 31
+    name = "Rent ledgers"
+    description = "Rental receipts, ledgers and property-manager statements."
+    keywords = ["rent ledger", "owner distribution statement"]
+
+  [[areas.categories]]
+    code = 32
+    name = "Tax records"
+    description = "Schedule E, information returns and supporting tax computations."
+    keywords = ["Schedule E", "Form 1099-MISC"]

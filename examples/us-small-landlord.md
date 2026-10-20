@@ -1,6 +1,6 @@
 # US small landlord
 
-[HuML file](us-small-landlord.huml)
+[HuML file](us-small-landlord.huml) · [Equivalent TOML](us-small-landlord.toml) · [Normative reference](../taxonomy-spec.md)
 
 Keep deeds, insurance and repair evidence separate from leases, deposits and rental income records. Properties and tenants are correspondents; state and local requirements need separate review before relying on any document list.
 

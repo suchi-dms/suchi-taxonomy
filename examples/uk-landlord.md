@@ -1,6 +1,6 @@
 # UK residential landlord
 
-[HuML file](uk-landlord.huml) · [Equivalent TOML](uk-landlord.toml)
+[HuML file](uk-landlord.huml) · [Equivalent TOML](uk-landlord.toml) · [Normative reference](../taxonomy-spec.md)
 
 Keep tenancy agreements, deposit records and safety reports alongside rent and tax paperwork. Use correspondents for each tenant, agent and property; review the rules for the relevant UK nation rather than treating this filing tree as a compliance checklist.
 

@@ -1,6 +1,6 @@
 # UK limited-company director
 
-[HuML file](uk-ltd-director.huml)
+[HuML file](uk-ltd-director.huml) · [Equivalent TOML](uk-ltd-director.toml) · [Normative reference](../taxonomy-spec.md)
 
 Keep statutory company records, tax submissions and director payment evidence apart from day-to-day banking and expenses. The categories describe documents, not customers, suppliers or successive accounting years.
 

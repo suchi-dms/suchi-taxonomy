@@ -1,0 +1,86 @@
+format = "suchi-taxonomy/v1"
+id = "in-ca-firm-s01"
+language = "en"
+license = "CC0-1.0"
+market = "in"
+name = "Sharma & Associates"
+story = "Keep client returns, audit working papers and signed engagements separate from the practice’s own finances and staff records. Identify clients with correspondents so new engagements do not require new categories."
+system = "S01"
+version = 1
+
+[[areas]]
+  code = 10
+  name = "Client document kinds"
+
+  [[areas.categories]]
+    code = 11
+    name = "Engagement and KYC"
+    description = "Signed engagement letters and identity checks; identify the client with correspondents."
+    keywords = ["engagement letter", "client acceptance checklist"]
+
+  [[areas.categories]]
+    code = 12
+    name = "Income tax filings"
+    description = "Client returns, acknowledgements, computation sheets and tax payment evidence."
+    keywords = ["ITR-V", "Form 26AS"]
+
+  [[areas.categories]]
+    code = 13
+    name = "GST filings"
+    description = "Client GST returns, reconciliations and acknowledgements."
+    keywords = ["GSTR-1", "GSTR-3B"]
+
+  [[areas.categories]]
+    code = 14
+    name = "Audit and working papers"
+    description = "Signed audit reports, evidence and working papers for each engagement."
+    keywords = ["Form 3CD", "audit working paper"]
+
+  [[areas.categories]]
+    code = 15
+    name = "ROC and secretarial filings"
+    description = "Company registry submissions, resolutions and filing acknowledgements."
+    keywords = ["Form AOC-4", "Form MGT-7"]
+
+  [[areas.categories]]
+    code = 16
+    name = "Certificates and UDIN"
+    description = "Issued professional certificates and their UDIN acknowledgements."
+    keywords = ["Unique Document Identification Number"]
+
+[[areas]]
+  code = 20
+  name = "Practice money"
+
+  [[areas.categories]]
+    code = 21
+    name = "Fees and receivables"
+    description = "Practice fee notes, collection records and receivable statements."
+    keywords = ["professional fee invoice"]
+
+  [[areas.categories]]
+    code = 22
+    name = "Practice tax"
+    description = "The practice’s own returns and tax computations, not client filings."
+
+[[areas]]
+  code = 30
+  name = "Practice administration"
+
+  [[areas.categories]]
+    code = 31
+    name = "Registrations and membership"
+    description = "Practice registrations, membership and certificates of practice."
+    keywords = ["certificate of practice"]
+
+  [[areas.categories]]
+    code = 32
+    name = "Staff and articles"
+    description = "Employment, articleship registration and stipend records."
+    keywords = ["articleship registration", "stipend statement"]
+
+  [[areas.categories]]
+    code = 33
+    name = "Peer review"
+    description = "Peer-review applications, evidence requests and issued reports."
+    keywords = ["peer review certificate"]

@@ -1,6 +1,6 @@
 # Deutscher Haushalt
 
-[HuML file](de-household.huml)
+[HuML file](de-household.huml) · [Equivalent TOML](de-household.toml) · [Normative reference](../taxonomy-spec.md)
 
 Ausweise, Steuerbescheide und Wohnunterlagen bekommen feste Plätze, die auch beim Umzug verständlich bleiben. Personen, Arbeitgeber und Anbieter werden als Korrespondenten erfasst; Fristen und Zugriffsrechte werden außerhalb dieser Vorlage geprüft.
 

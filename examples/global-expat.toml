@@ -1,0 +1,68 @@
+format = "suchi-taxonomy/v1"
+id = "global-expat"
+language = "en"
+license = "CC0-1.0"
+market = "global"
+name = "Cross-border and expat household"
+story = "Keep civil records, residence evidence and work permissions alongside family applications and status decisions. Family members and authorities are correspondents; the tree records evidence without predicting eligibility, deadlines or whether a document is still valid."
+version = 1
+
+[[areas]]
+  code = 10
+  name = "Identity and residence evidence"
+
+  [[areas.categories]]
+    code = 11
+    name = "Passports and visas"
+    description = "Passports, entry visas and associated issue or renewal records."
+    keywords = ["passport renewal", "entry visa"]
+
+  [[areas.categories]]
+    code = 12
+    name = "Civil documents and apostilles"
+    description = "Birth, marriage and other civil certificates, translations and authentication records."
+    keywords = ["birth certificate", "apostille"]
+
+  [[areas.categories]]
+    code = 13
+    name = "Address history and proofs"
+    description = "Address registrations, dated proofs and compiled residence histories."
+    keywords = ["proof of residence", "address registration"]
+
+[[areas]]
+  code = 20
+  name = "Work and status"
+
+  [[areas.categories]]
+    code = 21
+    name = "Permits"
+    description = "Work and residence permits, applications and renewal decisions."
+    keywords = ["work permit", "residence permit"]
+
+  [[areas.categories]]
+    code = 22
+    name = "Tax residency"
+    description = "Residency certificates, treaty-related forms and tax-status correspondence."
+    keywords = ["certificate of tax residence", "tax residency certificate"]
+
+[[areas]]
+  code = 30
+  name = "Family applications and decisions"
+
+  [[areas.categories]]
+    code = 31
+    name = "Citizenship and registration applications"
+    description = "Citizenship-by-descent, birth registration and related family applications."
+    keywords = ["citizenship by descent", "consular birth registration"]
+
+  [[areas.categories]]
+    code = 32
+    name = "Dependency and family evidence"
+    description = "Parentage, custody and dependency evidence supporting applications."
+    keywords = ["custody order", "proof of dependency"]
+
+  [[areas.categories]]
+    code = 33
+    name = "Family status decisions"
+    description = "Citizenship, family reunification and dependent-status decisions or certificates."
+    keywords = ["certificate of citizenship", "family reunification decision"]

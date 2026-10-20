@@ -1,0 +1,68 @@
+format = "suchi-taxonomy/v1"
+id = "in-ngo-fcra"
+language = "en"
+license = "CC0-1.0"
+market = "in"
+name = "Indian NGO and FCRA administration"
+story = "Separate registration and annual filing evidence from funding agreements and program reports. Donors and programs are correspondents, while the filing tree stays usable when the board or funding mix changes."
+version = 1
+
+[[areas]]
+  code = 10
+  name = "Registrations and governance"
+
+  [[areas.categories]]
+    code = 11
+    name = "Registrations"
+    description = "Tax exemption, NGO registration and foreign-contribution registration records."
+    keywords = ["Form 10AC", "FCRA registration certificate"]
+
+  [[areas.categories]]
+    code = 12
+    name = "Annual filings"
+    description = "Filed returns, annual accounts and submission acknowledgements."
+    keywords = ["Form FC-4", "ITR-7"]
+
+  [[areas.categories]]
+    code = 13
+    name = "Board and governance"
+    description = "Constitutional documents, board minutes and delegated-authority records."
+    keywords = ["board meeting minutes"]
+
+[[areas]]
+  code = 20
+  name = "Funding records"
+
+  [[areas.categories]]
+    code = 21
+    name = "Donor agreements and MoUs"
+    description = "Grant and donor agreements; donors remain correspondents."
+    keywords = ["grant agreement", "memorandum of understanding"]
+
+  [[areas.categories]]
+    code = 22
+    name = "CSR partnerships"
+    description = "CSR funding agreements, approvals and partnership reports."
+    keywords = ["CSR funding agreement"]
+
+  [[areas.categories]]
+    code = 23
+    name = "Receipts and utilization certificates"
+    description = "Donation receipts and project or grant utilization certificates."
+    keywords = ["utilization certificate", "donation receipt"]
+
+[[areas]]
+  code = 30
+  name = "Program evidence"
+
+  [[areas.categories]]
+    code = 31
+    name = "Project documents"
+    description = "Approved proposals, budgets and project plans; identify programs separately."
+    keywords = ["project proposal", "approved project budget"]
+
+  [[areas.categories]]
+    code = 32
+    name = "Field reports"
+    description = "Activity reports and monitoring evidence, with personal data access controlled separately."
+    keywords = ["field visit report", "beneficiary monitoring report"]

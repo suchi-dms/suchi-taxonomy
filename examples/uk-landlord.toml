@@ -1,56 +1,59 @@
 format = "suchi-taxonomy/v1"
 id = "uk-landlord"
-version = 1
-name = "UK residential landlord"
-market = "uk"
 language = "en"
 license = "CC0-1.0"
+market = "uk"
+name = "UK residential landlord"
 story = "Keep tenancy agreements, deposit records and safety reports alongside rent and tax paperwork. Use correspondents for each tenant, agent and property; review the rules for the relevant UK nation rather than treating this filing tree as a compliance checklist."
+version = 1
 
 [[areas]]
-code = 10
-name = "Tenancy records"
+  code = 10
+  name = "Tenancy records"
 
-[[areas.categories]]
-code = 11
-name = "Tenancy agreements"
-description = "Executed agreements, amendments and renewal correspondence."
-keywords = ["tenancy agreement", "occupation contract"]
+  [[areas.categories]]
+    code = 11
+    name = "Tenancy agreements"
+    description = "Executed agreements, amendments and renewal correspondence."
+    keywords = ["tenancy agreement", "occupation contract"]
 
-[[areas.categories]]
-code = 12
-name = "Deposits"
-description = "Deposit protection certificates, prescribed information and return or dispute records."
-keywords = ["deposit protection certificate", "prescribed information"]
+  [[areas.categories]]
+    code = 12
+    name = "Deposits"
+    description = "Deposit protection certificates, prescribed information and return or dispute records."
+    keywords = ["deposit protection certificate", "prescribed information"]
 
-[[areas.categories]]
-code = 13
-name = "Safety certificates"
-description = "Gas safety records, electrical condition reports and energy performance certificates."
-keywords = ["CP12", "EICR", "energy performance certificate"]
+  [[areas.categories]]
+    code = 13
+    name = "Safety certificates"
+    description = "Gas safety records, electrical condition reports and energy performance certificates."
+    keywords = ["CP12", "EICR", "energy performance certificate"]
 
 [[areas]]
-code = 20
-name = "Money"
+  code = 20
+  name = "Money"
 
-[[areas.categories]]
-code = 21
-name = "Rent and statements"
-description = "Rent ledgers, letting-agent statements and arrears correspondence."
-keywords = ["rent statement", "rental arrears"]
+  [[areas.categories]]
+    code = 21
+    name = "Rent and statements"
+    description = "Rent ledgers, letting-agent statements and arrears correspondence."
+    keywords = ["rent statement", "rental arrears"]
 
-[[areas.categories]]
-code = 22
-name = "Tax"
-description = "Property income returns, computations and supporting expense records."
-keywords = ["SA105", "UK property income"]
+  [[areas.categories]]
+    code = 22
+    name = "Tax"
+    description = "Property income returns, computations and supporting expense records."
+    keywords = ["SA105", "UK property income"]
 
-[[seeds.automations]]
-name = "Identify gas safety certificates"
-[seeds.automations.trigger]
-type = 2
-filter_content_matching = "(?i)gas safety record|landlord gas safety certificate"
-[[seeds.automations.actions]]
-kind = "assign_document_type"
-[seeds.automations.actions.params]
-document_type = "certificate"
+[seeds]
+
+  [[seeds.automations]]
+    name = "Identify gas safety certificates"
+    [seeds.automations.trigger]
+      type = 2
+      filter_content_matching = "(?i)gas safety record|landlord gas safety certificate"
+
+    [[seeds.automations.actions]]
+      kind = "assign_document_type"
+      [seeds.automations.actions.params]
+        document_type = "certificate"
