@@ -1,0 +1,60 @@
+format: "suchi-taxonomy/v1"
+id: "us-nonprofit-501c3"
+version: 1
+name: "US nonprofit 501(c)(3)"
+market: "us"
+language: "en"
+license: "CC0-1.0"
+story: "Keep federal status evidence, governance decisions and fundraising records in a tree the next treasurer can understand. Donors and grantmakers remain correspondents; this example does not decide filing duties or guarantee continued exemption."
+
+areas::
+  - ::
+    code: 10
+    name: "Federal status and filings"
+    categories::
+      - ::
+        code: 11
+        name: "Determination letter and EIN"
+        description: "IRS determination, EIN assignment and status correspondence."
+        keywords:: "determination letter", "CP 575"
+      - ::
+        code: 12
+        name: "Form 990 filings"
+        description: "Filed annual information returns and acknowledgements."
+        keywords:: "Form 990", "Form 990-EZ"
+  - ::
+    code: 20
+    name: "Governance"
+    categories::
+      - ::
+        code: 21
+        name: "Bylaws and policies"
+        description: "Current and historical bylaws, conflict policies and approved governance policies."
+        keywords:: "conflict of interest policy", "bylaws"
+      - ::
+        code: 22
+        name: "Board minutes"
+        description: "Board decisions, approved minutes and supporting resolutions."
+        keywords::
+          - "board meeting minutes"
+  - ::
+    code: 30
+    name: "Fundraising"
+    categories::
+      - ::
+        code: 31
+        name: "Donor acknowledgments"
+        description: "Contribution acknowledgments and supporting gift records."
+        keywords::
+          - "no goods or services were provided"
+      - ::
+        code: 32
+        name: "Grants"
+        description: "Grant agreements, award letters and reporting evidence."
+        keywords:: "grant award letter", "grant reporting requirements"
+      - ::
+        code: 33
+        name: "State registrations"
+        description: "Charitable solicitation registrations, renewals and state correspondence."
+        keywords::
+          - "charitable solicitation registration"

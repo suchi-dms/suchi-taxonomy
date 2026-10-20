@@ -1,0 +1,62 @@
+format: "suchi-taxonomy/v1"
+id: "de-verein"
+version: 1
+name: "Deutscher Verein"
+market: "eu-de"
+language: "de"
+license: "CC0-1.0"
+story: "Satzung, Registerunterlagen und Vorstandsentscheidungen bleiben beim Vorstandswechsel auffindbar. Mitgliedsanträge, Beitragsnachweise und Förderunterlagen erhalten eigene Dokumentkategorien; Mitglieder werden nicht zu immer neuen Kategorien."
+
+areas::
+  - ::
+    code: 10
+    name: "Verein"
+    categories::
+      - ::
+        code: 11
+        name: "Satzung und Register"
+        description: "Satzung, Änderungen und Vereinsregisterauszüge."
+        keywords:: "Vereinsregisterauszug", "Satzungsänderung"
+      - ::
+        code: 12
+        name: "Gemeinnützigkeit"
+        description: "Freistellungsbescheide und steuerliche Statusunterlagen."
+        keywords:: "Freistellungsbescheid", "Gemeinnützigkeitsbescheid"
+      - ::
+        code: 13
+        name: "Vorstand und Protokolle"
+        description: "Wahlunterlagen, Vorstands- und Mitgliederversammlungsprotokolle."
+        keywords:: "Vorstandssitzungsprotokoll", "Mitgliederversammlungsprotokoll"
+  - ::
+    code: 20
+    name: "Mitgliedschaft"
+    categories::
+      - ::
+        code: 21
+        name: "Aufnahme und Austritt"
+        description: "Mitgliedsanträge, Aufnahmebestätigungen und Austrittserklärungen."
+        keywords:: "Mitgliedsantrag", "Austrittserklärung"
+      - ::
+        code: 22
+        name: "Mitgliederverzeichnisse und Einwilligungen"
+        description: "Mitgliederlisten und dokumentierte Einwilligungen; Zugriffe separat regeln."
+        keywords:: "Mitgliederverzeichnis", "Einwilligungserklärung"
+      - ::
+        code: 23
+        name: "Beiträge und Mandate"
+        description: "Beitragsbescheide, Zahlungsnachweise und Lastschriftmandate."
+        keywords:: "Mitgliedsbeitrag", "SEPA-Lastschriftmandat"
+  - ::
+    code: 30
+    name: "Finanzen"
+    categories::
+      - ::
+        code: 31
+        name: "Kassenberichte"
+        description: "Kassenberichte, Bankabstimmungen und Kassenprüfungsberichte."
+        keywords:: "Kassenprüfungsbericht", "Kassenbericht"
+      - ::
+        code: 32
+        name: "Zuschüsse"
+        description: "Förderbescheide, Anträge und Verwendungsnachweise."
+        keywords:: "Zuwendungsbescheid", "Verwendungsnachweis"
