@@ -15,19 +15,16 @@ version = 1
     code = 11
     name = "Ownership and registry"
     description = "Conveyances, registration acknowledgements and ownership extracts."
-    keywords = ["sale deed", "encumbrance certificate"]
 
   [[areas.categories]]
     code = 12
     name = "Property tax"
     description = "Assessments and payment receipts for local property taxes."
-    keywords = ["property tax receipt", "property tax assessment"]
 
   [[areas.categories]]
     code = 13
     name = "Society and maintenance"
     description = "Society permissions, maintenance demands and repair records."
-    keywords = ["society no objection certificate", "maintenance demand"]
 
 [[areas]]
   code = 20
@@ -37,16 +34,13 @@ version = 1
     code = 21
     name = "Agreements"
     description = "Executed lease or leave-and-licence agreements and amendments."
-    keywords = ["leave and license agreement", "residential lease agreement"]
 
   [[areas.categories]]
     code = 22
     name = "Police verification and KYC"
     description = "Tenant verification acknowledgements and identity evidence; restrict access separately."
-    keywords = ["tenant police verification"]
 
   [[areas.categories]]
     code = 23
     name = "Rent receipts"
     description = "Issued rent receipts and rent-payment evidence."
-    keywords = ["rent receipt"]

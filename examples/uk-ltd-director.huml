@@ -1,3 +1,4 @@
+%HUML v0.2.0
 format: "suchi-taxonomy/v1"
 id: "uk-ltd-director"
 version: 1
@@ -16,17 +17,14 @@ areas::
         code: 11
         name: "Incorporation and statutory registers"
         description: "Incorporation certificates, articles and statutory register records."
-        keywords:: "certificate of incorporation", "register of members"
       - ::
         code: 12
         name: "Confirmation statements"
         description: "Filed confirmation statements and Companies House acknowledgements."
-        keywords:: "confirmation statement", "CS01"
       - ::
         code: 13
         name: "Contracts"
         description: "Executed client, supplier and other company agreements."
-        keywords:: "services agreement", "supplier agreement"
   - ::
     code: 20
     name: "Tax and remuneration"
@@ -35,25 +33,18 @@ areas::
         code: 21
         name: "Corporation tax"
         description: "Company tax returns, computations and payment evidence."
-        keywords::
-          - "CT600"
       - ::
         code: 22
         name: "VAT"
         description: "VAT returns, calculations and filing acknowledgements."
-        keywords::
-          - "VAT return"
       - ::
         code: 23
         name: "PAYE and payroll"
         description: "Payroll submissions, payslips and employer payment records."
-        keywords:: "full payment submission", "employer payment summary"
       - ::
         code: 24
         name: "Dividends"
         description: "Dividend vouchers and supporting board decisions."
-        keywords::
-          - "dividend voucher"
   - ::
     code: 30
     name: "Banking and expenses"
@@ -62,15 +53,11 @@ areas::
         code: 31
         name: "Bank statements and reconciliations"
         description: "Company account statements and reconciliations; distinguish accounts with metadata."
-        keywords::
-          - "bank reconciliation"
       - ::
         code: 32
         name: "Expense invoices and receipts"
         description: "Supplier invoices and receipts supporting company expenditure."
-        keywords:: "supplier invoice", "expense receipt"
       - ::
         code: 33
         name: "Director expense claims and loans"
         description: "Reimbursements, expense claims and director loan account evidence."
-        keywords:: "director loan account", "director expense claim"

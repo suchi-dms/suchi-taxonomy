@@ -1,131 +1,150 @@
 # Suchi taxonomy v1 reference
 
-This is the de facto normative reference for the implemented `suchi-taxonomy/v1`
-contract and its filing-system integration. **MUST**, **MUST NOT** and **MAY** state
-contract requirements or permissions; recommendations are identified separately.
-It describes Suchi's adaptation, not every Johnny.Decimal convention, a public
-release announcement or a minimum supported Suchi version. The implementation
-owners are the core [parser and validator](https://github.com/johnnybravo-xyz/suchi/tree/main/core/jd/presetfile),
-[importer](https://github.com/johnnybravo-xyz/suchi/tree/main/core/jd/importer)
-and [systems package](https://github.com/johnnybravo-xyz/suchi/tree/main/core/jd/systems).
+This is the reference for `suchi-taxonomy/v1`, the file format Suchi uses to
+import and export a filing tree, and for how those files interact with filing
+systems. Where it says **MUST**, **MUST NOT**, **SHOULD NOT** or **MAY**, that
+is the contract. Everything else is advice, and I've tried to label it as advice.
 
-The examples and this reference are **unreviewed**, not legal advice, compliance
-checklists, professional approval or classification-accuracy guarantees. This
-static collection is CC0-1.0; linked sources retain their own terms. Johnny.Decimal
-is a trademark of Coruscade Pty Ltd. Suchi is independent, not affiliated with or
-endorsed by Johnny.Decimal.
+It describes what Suchi actually implements. It isn't a summary of every
+Johnny.Decimal convention, a release announcement, or a promise about which
+Suchi version you need. If this page and the code ever disagree, the code wins.
+The code lives in three places: the
+[parser and validator](https://github.com/johnnybravo-xyz/suchi/tree/main/core/jd/presetfile),
+the [importer](https://github.com/johnnybravo-xyz/suchi/tree/main/core/jd/importer)
+and the [systems package](https://github.com/johnnybravo-xyz/suchi/tree/main/core/jd/systems).
 
-## 1. What a file represents
+Nobody has reviewed these examples or this reference professionally. They are
+not legal advice, compliance checklists or a guarantee that anything gets
+classified correctly. The collection is CC0-1.0; linked sources keep their own
+terms. Johnny.Decimal is a trademark of Coruscade Pty Ltd. Suchi is independent,
+and not affiliated with or endorsed by Johnny.Decimal.
 
-One file describes one system's complete proposed filing tree, optional literal
-keyword starters, and the supported explicit automation starters. It is not a
-set of patches, a document inventory, an access-control file, an inheritance
-mechanism or a restore archive. Applying that complete proposed tree normally
-**merges** it with existing local state; it does not reset the destination.
+## 1. What a file is
 
-Keep these identities distinct:
+One file describes one filing system's complete proposed tree: its areas, its
+categories and their descriptions. That's it. A file is not a patch, a document
+inventory, an access-control list, an overlay that inherits from another file,
+or a backup you can restore from. When you apply it, Suchi **merges** it into
+what you already have. It never wipes the destination first.
 
-| Field or identity | Meaning |
+A file carries no automations. Matching rules are yours to write in Suchi's
+Automations page, in your own words and your own language. Suchi 0.2 exports put
+category `keywords` and `seeds.automations` in the file; section 2.5 covers
+what happens to those today.
+
+A few identities look alike and mean different things, so keep them apart:
+
+| Field or identity | What it means |
 | --- | --- |
-| `format` | Exact schema label `suchi-taxonomy/v1`, not an application release. |
-| `id` and `version` | Authoring-content identity and positive content revision; not system identity or a document ID. |
-| Optional `system` | Permanent filing-system code, for example `S01`. |
-| `name` | Human-readable taxonomy name; supplies the system display name on first adoption/creation. |
-| Runtime `documents.id` | Existing installation-global document identity, allocated by Suchi, never authored here. |
+| `format` | The exact schema label `suchi-taxonomy/v1`. Not a Suchi release number. |
+| `id` and `version` | Who authored this content and which revision it is. Not a system code and not a document ID. |
+| `system` (optional) | The permanent filing-system code, for example `S01`. |
+| `name` | The tree's human name. It also becomes the system's display name the first time the system is adopted or created. |
+| `documents.id` (runtime) | Suchi's own installation-wide document number. Suchi allocates it; you never write it in a file. |
 
-Retaining category meanings within a content ID and increasing revisions when
-editing reference content are recommended authoring discipline. The importer does
-not enforce revision monotonicity or provide managed template upgrades.
+My advice: once a category code means something inside an `id`, keep it
+meaning that, and bump `version` when you edit the content. The importer doesn't
+enforce either. It won't stop a revision going backwards, and there is no
+managed upgrade path from one template revision to the next.
 
-## 2. Serialization and strict acceptance
+## 2. Formats and what gets rejected
 
-Files MUST use HuML or TOML, be nonempty valid UTF-8, and contain at most
-**1,048,576 bytes**, inclusive. JSON tags used inside Suchi do not make JSON or
-YAML public authoring formats. The core parser accepts serialization selectors
-`huml` and `toml` (omission means HuML), without content sniffing; extension-based
-selection accepts `.huml` and `.toml` case-insensitively.
+A file MUST be TOML or HuML, MUST be nonempty valid UTF-8, and MUST be at most
+**1,048,576 bytes**. Suchi uses JSON tags internally, but that doesn't make JSON
+or YAML authoring formats. The parser takes a format of `toml` or `huml`; if you
+leave it out you get TOML. It never sniffs content to guess. When the format
+comes from a file extension, `.toml` and `.huml` are matched case-insensitively.
 
-The parser MUST reject unknown fields at every schema level, duplicate mapping
-keys, null values, wrong scalar/list/object types, integer overflow and invalid
-structure. It does not coerce `"1"` into an integer or a number into a string.
-Schema-required integers are integral values, not floats. Metadata `version` must
-fit the implementation's integer representation (decoded from signed 64-bit input;
-there is no additional revision ceiling).
+HuML files may start with a `%HUML v0.2.0` version line, and Suchi's own HuML
+exports always do. With that line present, a file written for a different HuML
+version is rejected rather than read with the wrong rules. The examples in this
+repository all carry it.
 
-Text limits below count **Unicode code points**, not bytes or grapheme clusters.
-“Nonblank” means nonempty after whitespace testing; accepted surrounding whitespace
-is generally retained, not automatically trimmed. Code grammars are stricter and
-permit no surrounding whitespace. The total byte limit always applies.
+The parser is strict on purpose. It MUST reject unknown fields at every level,
+duplicate keys, nulls, wrong types (a string where a list belongs, and so on),
+integer overflow and broken structure. It doesn't convert `"1"` into `1` or a
+number into a string. Integer fields take whole numbers, not floats. `version`
+must fit a signed 64-bit integer; there's no other ceiling on it.
 
-### 2.1 Top-level fields: exhaustive whitelist
+Text limits below count **Unicode code points**, not bytes and not grapheme
+clusters. "Nonblank" means something other than whitespace is left after the
+whitespace check. Leading and trailing whitespace is generally kept as you wrote
+it, not trimmed for you. Codes are stricter: no surrounding whitespace at all.
+The 1 MiB file limit applies on top of everything.
+
+### 2.1 Top-level fields
+
+This is the complete list. Anything else is an error, apart from the two old
+fields in 2.5.
 
 | Field | Type and rule |
 | --- | --- |
 | `format` | Required string, exactly `suchi-taxonomy/v1`. |
-| `system` | Optional string; if present MUST be nonempty and match `^[A-Z][0-9]{2}$`. |
+| `system` | Optional string. If present it MUST be nonempty and match `^[A-Z][0-9]{2}$`. |
 | `id` | Required string matching `^[a-z0-9][a-z0-9_-]*$`. |
 | `version` | Required positive integer. |
 | `name` | Required nonblank string, at most 80 code points. |
 | `market`, `language` | Required nonblank strings. |
 | `maintainer`, `license` | Optional strings. |
 | `story` | Required nonblank string, at most 500 code points. |
-| `flat` | Optional boolean, defaults to false; authoring shorthand, not runtime rendering mode. |
-| `areas` | Required explicit list in ordinary tree form; forbidden when `flat=true`. |
-| `categories` | Forbidden in ordinary tree form; required list when `flat=true`. |
-| `seeds` | Optional object; its only supported field is `automations`, an optional list. |
+| `flat` | Optional boolean, false by default. Authoring shorthand only; see 2.3. |
+| `areas` | Required list in ordinary tree form. Forbidden when `flat = true`. |
+| `categories` | Forbidden in ordinary tree form. Required list when `flat = true`. |
 
-There is no extra declared maximum for `id`, `market`, `language`, `maintainer` or
-`license` beyond the whole-file bound. Market/language are not validated against
-ISO/BCP-47 vocabularies; license is not checked against SPDX; maintainer need not
-be a URL or email. Those conventions remain useful authoring recommendations.
+`id`, `market`, `language`, `maintainer` and `license` have no length limit of
+their own beyond the file limit. Suchi doesn't check `market` or `language`
+against ISO or BCP 47 lists, doesn't check `license` against SPDX, and doesn't
+care whether `maintainer` is a URL or an email address. Following those
+conventions is still a good idea.
 
-There is no top-level `systems`, `inbox`, document list, assigned document ID,
-access grant, secret or arbitrary extension field. The valid top-level `system`
-string MUST NOT be confused with the category projection's runtime `system`
-boolean, which means protected/generated and is not authorable.
+There is no top-level `systems`, `inbox`, document list, document ID, access
+grant, secret or free-form extension field. Don't confuse the top-level `system`
+string with the `system` boolean you may see on categories at runtime. That one
+marks generated, protected rows, and you can't author it.
 
 ### 2.2 Areas and categories
 
-An area object has exactly `code` (integer), `name` (nonblank string, at most 80
-code points), and `categories` (explicit list, allowed to be empty). There is no
-area description field. `areas=[]` is a valid explicit blank tree.
+An area has exactly three fields: `code` (integer), `name` (nonblank, at most 80
+code points) and `categories` (a list, which may be empty). Areas have no
+description. `areas = []` is a valid, deliberately blank tree.
 
-At most eight authored areas are permitted, with distinct codes from
-**10, 20, 30, 50, 60, 70, 80, 90**. In area `A`, a category's code MUST be one of
-`A+1` through `A+9`. Category codes MUST be unique across the whole file; names
-need not be unique. Thus the permitted tree has at most nine user categories per
-area and 72 per file, without another independent category-count setting.
+You get at most eight areas, each with a distinct code from
+**10, 20, 30, 50, 60, 70, 80, 90**. In area `A`, a category code MUST be between
+`A+1` and `A+9`. Category codes MUST be unique across the whole file; names don't
+have to be. So a file holds at most nine categories per area and 72 in total.
+There is no separate category-count setting.
 
 | Category field | Type and rule |
 | --- | --- |
-| `code` | Required integer in tree form; see flat shorthand below for omission. |
+| `code` | Required integer in tree form. Flat shorthand can omit it; see 2.3. |
 | `name` | Required nonblank string, at most 80 code points. |
 | `description` | Optional string, at most 240 code points. |
-| `keywords` | Optional list of at most 20 strings, each nonblank and at most 40 code points. Duplicate keywords are not separately rejected. |
 
-Authors MUST NOT declare areas/categories in `00–09` or `40–49`, zero-ending
-categories, an Inbox pointer or a category protected flag. After raw validation,
-parsing appends exactly `40 System / 49 Inbox` and sets the normalized Inbox to
-49. Generated structure is not counted as an authored area. Existing legacy
-runtime rows are not evidence that the portable format accepts those codes.
+You MUST NOT declare anything in `00–09` or `40–49`, a category code ending in
+zero, an Inbox pointer, or a protected flag on a category. After the raw file
+passes validation, Suchi appends `40 System / 49 Inbox` itself and points the
+Inbox at 49. That generated area doesn't count towards your eight. Old databases
+may still have rows in those ranges; that doesn't mean the file format accepts
+them.
 
-### 2.3 Flat authoring is shorthand
+### 2.3 Flat shorthand
 
-With `flat=true`, top-level `categories` MUST have 1–9 entries and `areas` MUST be
-absent, even if empty. Entries receive category codes 11–19 in list order. A raw
-entry MAY omit `code`; if supplied it MUST equal that entry's expected code.
-Explicit zero is not an alias for omission. Reordering changes the inferred codes.
+Set `flat = true` and you can skip areas. Top-level `categories` MUST then hold
+1 to 9 entries, and `areas` MUST be absent, even as an empty list. Entries get
+codes 11 to 19 in the order you list them. An entry MAY leave out `code`; if it
+has one, it MUST be the code its position implies. Zero doesn't mean "omitted".
+Reorder the list and the codes change with it.
 
-Parsing expands the entries into area 10 named after the taxonomy and adds the
-same generated System/Inbox. This does **not** enable Suchi's separately stored
-runtime `flat` taxonomy/rendering mode, which hides JD affordances and uses a
-correspondent/year layout. Imports install/merge JD structure; a new system starts
-in JD mode. Database export writes explicit areas and need not preserve the
-original flat spelling.
+Parsing turns this into area 10, named after the tree, plus the usual generated
+System and Inbox. It does **not** switch on Suchi's runtime flat mode, which is a
+separate setting that hides the JD numbering and lays documents out by
+correspondent and year. Imports always install JD structure, and a new system
+starts in JD mode. If you export the tree again you'll get explicit areas back,
+not your original flat spelling.
 
-### 2.4 Small complete authoring example
+### 2.4 A small complete file
 
-This TOML describes a proposed tree, not existing documents or access grants:
+This TOML proposes a tree. It says nothing about documents or who can see them.
 
 ```toml
 format = "suchi-taxonomy/v1"
@@ -149,10 +168,10 @@ name = "Engagement letters"
 code = 13
 name = "GST filings"
 description = "Returns and acknowledgements, identified by client correspondent."
-keywords = ["GSTR-3B"]
 ```
 
-Normalized filing structure, **not additional author input**:
+What Suchi ends up with. You don't write the System and Inbox lines; Suchi
+adds them:
 
 ```text
 S01 Small office
@@ -163,349 +182,323 @@ S01 Small office
     49 Inbox                  generated
 ```
 
-## 3. Portable starters: complete vocabulary
+### 2.5 Files from older Suchi versions
 
-Keywords are literal starter phrases, not authored regular expressions. Import
-trims and regex-escapes them and uses case-insensitive matching with Unicode
-letter/number/underscore boundaries. Generated category rules assign the matching
-category in the destination system; they do not assess correctness or compliance.
-Review literal matches before relying on them.
+Before 0.3.0, filing trees could carry category `keywords` and a top-level
+`seeds` object with `automations`. Suchi 0.3.0 dropped both. The parser now
+removes them before it validates anything else, so an old export still imports
+its tree, and the keywords and rules are quietly left behind. Nothing you have
+in Automations changes.
 
-Each `seeds.automations` entry has exactly `name` (nonblank, at most 80 code
-points), `trigger` (one object), and `actions` (nonempty list). Explicit starter
-names MUST be unique by exact string within that list. No enabled flag, order,
-owner, runtime row ID or preset slug can be authored. An empty `seeds` object or
-empty automation list is permitted.
+New files SHOULD NOT carry these fields. Because they're dropped before
+validation, the parser doesn't check them, and a file that relies on them will
+look fine while doing nothing. None of the examples here include them.
 
-### 3.1 Trigger fields
+## 3. Normalization and what it won't fix for you
 
-`type` is required and MUST be integer **1 consumption**, **2 document_added** or
-**3 document_updated**. All other accepted fields are optional:
+Suchi validates the file exactly as written before it expands flat shorthand or
+adds the Inbox. Serializing does the reverse: it undoes the normalization it
+knows about, leaves out the generated Inbox, and reparses its own output to
+check it. A normalized tree handed to import or export MUST contain exactly the
+generated `40 System / 49 Inbox` and nothing more there: no custom Inbox
+description, no renamed System. Suchi rejects those rather than quietly dropping
+them.
 
-| Field(s) | Type / interpretation |
+TOML and HuML describe the same contract. They don't produce the same bytes.
+Comments, formatting, key order and optional directives can change when you
+convert between them. List order can matter, especially for flat codes.
+Two files that mean the same thing can have different SHA-256 hashes, and v1 has
+no canonical byte form to hash instead. Compare files by parsing them.
+
+Some inputs that fail:
+
+- `system = ""`, `system = "s01"`, `system = "AUD"`, `system = " S01"`, or a
+  numeric system.
+- A quoted version, a float category code, a duplicate key, or an unknown field
+  anywhere.
+- An authored area 40, category 10, `inbox`, `categories` with `flat = false`,
+  or any `areas` key with `flat = true`.
+- A category outside its area's decade, a repeated category code, or a name
+  that's too long.
+
+An error is an error. Suchi won't fix your casing, trim your codes, grant
+access, invent hidden document IDs or silently drop data it doesn't support.
+
+## 4. Systems, the first import, and merging
+
+A system code MUST match `^[A-Z][0-9]{2}$`, so **A00 to Z99**, including codes
+ending in 00. Once a system has a code, the code never changes and is never
+reused. Display names can change: nonblank UTF-8, at most 80 code points. There
+is no "enable systems" setting, no way to turn them off again, and no system
+delete, merge or cross-system document move in this contract.
+
+Before you introduce systems, there is one hidden original system: internal ID
+1, no code. You don't configure it and you don't see an extra address layer.
+Systems appear only when you successfully apply your first **prefixed** import,
+meaning a file with a top-level `system`:
+
+| What you import, and when | What happens |
 | --- | --- |
-| `filter_path`, `filter_filename` | String; Go `filepath.Match` glob syntax. |
-| `filter_title_matching`, `filter_content_matching` | String; Go regular expression syntax, matched case-insensitively. |
-| `filter_has_tag`, `filter_has_correspondent`, `filter_has_document_type` | String; symbolic metadata names, resolved within the target system. |
-| `filter_email_from`, `filter_email_subject` | String; glob syntax. |
-| `filter_email_folder` | String; literal folder match, not regex. |
-| `filter_email_has_attachment` | Boolean; omitted, true and false are distinct. |
+| Unprefixed file, before systems | Goes into the single archive. No system layer appears. |
+| First prefixed file, ordinary destination | The original archive takes the file's code and name, and the tree is imported into it. Documents, IDs, memberships and ACLs all stay as they were. |
+| First prefixed file, keep the original separate | The original archive gets a distinct code you choose with `existing_system_code` (for example `A00`) and keeps its name. The file's system is created next to it, in one atomic step. |
+| Prefixed file after systems exist, known code | Merges into that system only. |
+| Prefixed file after systems exist, new code | Creates that system with its generated Inbox and tree, atomically. |
+| Unprefixed file after systems exist | Goes into the target you selected, or original system 1 if you didn't pick one. It never removes systems. |
 
-The validator checks trigger codes and glob/regex syntax; it does not prove that
-a chosen trigger/filter combination is useful. Optional strings may be empty;
-there is no additional field-length limit beyond the whole-file bound.
+`existing_system_code` is an import option, **not** a file field. It only works
+on the first prefixed import, and it must differ from the incoming code. If you
+name a target explicitly and the file names a system, the two MUST agree. A
+file's prefix beats the browser's "current system" fallback, but it doesn't
+override an explicit target in the request body that disagrees with it. A target
+option on its own can't create a system from an unprefixed file. On the CLI,
+`--system CODE` picks a target; without it you get the original archive, unless
+the file names its own system. `--existing-system-code CODE` chooses the
+keep-it-separate path on the first import.
 
-### 3.2 Action objects
+Memberships in the original archive survive the introduction. A brand-new system
+lets in only active instance admins at first; everyone else needs a direct
+membership. While the original system is still hidden, new ordinary users and
+demoted admins are added to it automatically. Once it has a name, that stops.
+Reimporting into a system you've already named keeps your edited display name
+rather than taking the file's.
 
-An action has exactly `kind` (string) and `params` (object). The following list is
-exhaustive; the parameter object MUST contain only the indicated alternative:
+### 4.1 Preview, then apply
 
-| `kind` | Exact `params` |
-| --- | --- |
-| `assign_title` | `template`: nonblank string. Portable validation does not further validate template syntax. |
-| `assign_tags` | `tag`: nonblank string **or** `tags`: nonempty list of nonblank strings; never both. |
-| `assign_correspondent` | `correspondent`: nonblank string. |
-| `assign_document_type` | `document_type`: nonblank string. |
-| `assign_jd_category` | `jd_category_code`: integer referring to a declared user category in this file. |
+Preview MUST NOT change anything. Apply needs the nonempty state hash from a
+matching preview, and it recomputes the whole proposal inside its write
+transaction. For API calls, the actor comes from authentication and is checked
+again, inside that transaction, for being an active instance admin. A trusted
+local CLI run is a different path from an actor named in a request body.
 
-These strings and the tag list have no additional declared length/count limit
-beyond the file bound. Metadata references use names rather than stored IDs.
-Category references use codes, resolved through any import remap **only within the
-target system**. Generated 49 Inbox is not a portable assignment target.
-`jd_category_id`, a foreign-system target, owner assignment, custom fields,
-sensitivity/review settings, ACL actions and credentials are not supported.
-There are no standalone seed families for tags, correspondents or other entities.
+The hash covers the source bytes and normalized input, the destination and
+first-import choice, the target's identity, provenance, members and whether it's
+being created, any remaps, and the target tree. Edits in an unrelated system
+don't invalidate a preview. Creating the same code somewhere else, or changing
+the target, does. A stale or failed Apply MUST leave nothing half done: no
+half-named or half-created system, no partly changed permissions or tree. The
+destination change, the tree, last-import provenance and the jobs it needs all
+commit together. Rendering files to disk happens afterwards, in the background,
+so a committed job is not proof that the folders on disk have caught up.
 
-Skipping starters during import is **not** relaxed parsing: malformed or
-unsupported starters MUST still fail validation.
+### 4.2 How merging works
 
-## 4. Normalization and rejection boundaries
+- An area code that already exists keeps its local name. A category with the
+  same code **and the exact same name** keeps its row and its local description.
+- If the file has a different name at a code you already use, you MUST either
+  skip it or remap it to an unused code, not ending in zero, in the same decade.
+  You can't remap to a code already used in the target or the incoming tree.
+  Both reserved decades are off limits. A remap is never a cross-system move.
+- Imports never create, change or remove automations. Your rules stay exactly
+  as they were, enabled or not.
 
-Parsing validates raw authorship before flat expansion or Inbox generation.
-Serialization reverses recognized normalization, omits generated Inbox, and
-reparses its output. A normalized tree supplied to import/export MUST contain
-exactly the generated `40 System / 49 Inbox`, with no custom Inbox description or
-keywords; renamed/custom reserved content is rejected, not silently discarded.
+Replacing a tree outright is a narrow exception for brand-new archives, not a
+general reset. It needs every one of these: no document anywhere, Trash
+included, sits in an unprotected category; the target has no automations, saved
+views, storage paths or email accounts; no preset has been chosen; and at most
+the neutral Inbox exists. Once initial setup is finished, the original archive
+can't be replaced this way. The protected Inbox row always stays.
 
-HuML and TOML represent the same normalized contract, not canonical identical
-bytes. Comments, formatting and optional serialization directives need not survive
-conversion. Ordering may matter, especially for flat codes and starter order.
-Source-byte SHA-256 provenance may differ between semantically equivalent files;
-there is no universal canonical-byte hash in v1.
+Each system remembers the last imported ID, revision, source hash and authoring
+snapshot. That's provenance, not an immutable import history, and it doesn't
+promise the current tree still matches that file. Importing the same revision
+and hash again is not automatically a no-op.
 
-Examples of rejected input include:
+## 5. Filing addresses and document identity
 
-- `system=""`, `system="s01"`, `system="AUD"`, `system=" S01"`, or a numeric system.
-- A quoted version, float category code, null keyword, duplicate mapping key or
-  unknown field even in a nested action parameter.
-- An authored area 40, category 10, `inbox`, `categories` with `flat=false`, or
-  any `areas` key with `flat=true`.
-- A category outside its area's decade, repeated category code, overlong name,
-  or action assigning an undeclared category/foreign database row.
+Suchi gives every category a two-part **address**. Before you have systems it's
+`AREA.AC`, for example `20.21`. Once systems exist, every system, including the
+named original archive, uses `SYS.AC`, for example `S01.21`. The category code
+already tells you its decade, so the area drops out as soon as the system code
+is needed to tell systems apart.
 
-Errors are errors, not requests to normalize case, trim codes, grant access,
-create hidden document IDs or silently drop unsupported data.
-
-## 5. Systems, first import and merge
-
-A system code MUST match `^[A-Z][0-9]{2}$`: **A00–Z99**, including suffix 00.
-A nonempty code is immutable and cannot be reassigned. Display names are editable,
-nonblank UTF-8, at most 80 code points. There is no systems-enable preference,
-opt-out toggle, system deletion/merge operation or cross-system document transfer
-promised by this contract.
-
-Before introduction there is one hidden original system (internal ID 1, empty
-code). Users do not configure it or see an extra address layer. Systems are
-introduced only by successfully applying the first **prefixed taxonomy import**:
-
-| Input and state | Destination/result |
-| --- | --- |
-| Unprefixed file before introduction | Existing single archive; no SYS layer is introduced. |
-| First prefixed file, ordinary destination | Name the original archive with the incoming code/name and import into it; preserve existing documents, IDs, memberships and ACLs. |
-| First prefixed file, explicitly preserve original separately | Give the original archive a distinct valid `existing_system_code` (for example A00), preserving its name; atomically create the incoming file's system. |
-| Prefixed file after introduction, existing code | Merge only into that system. |
-| Prefixed file after introduction, new code | Atomically create that system, its generated Inbox, tree and supported starters. |
-| Unprefixed file after introduction | Import into the captured selected target, or original system 1 when unqualified; never remove SYS. |
-
-`existing_system_code` is an import option, **not a file field**. It is only valid
-for the first prefixed import and must differ from the incoming code. An explicit
-import target and a file's `system` MUST agree. An API file prefix takes precedence
-over the browser's ordinary current-system query fallback, not over a conflicting
-explicit body target. A target option alone with an unprefixed file cannot create
-a system. CLI `--system CODE` selects a target; omission retains the original
-archive unless the file itself names its target. `--existing-system-code CODE`
-selects separate preservation on first import.
-
-Existing original memberships survive introduction. A newly created system is
-initially enterable only by active instance administrators; ordinary users require
-explicit direct membership. While the original system remains hidden, ordinary
-new users and demoted administrators are admitted there automatically; after it
-is named there is no such automatic membership. Reimporting into an already named
-system preserves its locally edited display name rather than adopting a template
-name change.
-
-### 5.1 Preview and application
-
-Preview MUST be read-only. Apply requires a matching nonempty preview-state hash
-and recomputes the proposal inside its write transaction. API actors are taken
-from authentication and rechecked as active instance administrators in that
-transaction; trusted local CLI invocation is distinct from a body-supplied actor.
-
-The binding covers source bytes and normalized input, destination/first-import
-choice, target identity/provenance/members/creation state, remaps, seed choices,
-target tree and relevant rules/references. Unrelated ordinary edits in a different
-system do not invalidate it, but a conflicting code creation or target change
-does. Stale/failed Apply MUST leave no partly named/created system or partly
-changed permissions/tree. Destination changes, tree, starters, last-import
-provenance and required projection jobs commit together. Filesystem projection
-is asynchronous: committed queued work is not proof that rendered files refreshed.
-
-### 5.2 Ordinary merge rules
-
-- Existing area codes retain local names. Same category code **and exact name**
-  retain the row and local description.
-- A different name at an occupied category code requires explicit skip or an
-  unused nonzero-ending code in the same decade. A code already in the target or
-  incoming tree cannot be the remap destination. This is not a cross-system move.
-- Existing rule names win, including disabled originals and user-owned edited
-  forks. Reimport does not silently re-enable or overwrite them. Skipping or
-  failing to resolve a category skips the whole dependent starter, not just one
-  action within it.
-- Metadata names resolve in the target system: trimmed exact name first, otherwise
-  a matching canonical slug. Local canonical names are not overwritten.
-- Keyword-rule names incorporate authoring ID and effective category code/name;
-  their trigger is document-added and order 100. Explicit starters retain list
-  order. Changing a template ID is not an upgrade mechanism for existing rules.
-  If two rules to be added share an effective name, Preview MUST reject the
-  proposal with the conflicting name and actionable guidance to rename the
-  explicit starter or remove category keywords. Existing-name preservation and
-  skipped rules do not participate in this planned-addition collision check.
-
-Neutral bootstrap replacement is a narrow initial-setup exception, not a general
-reset: no document, including Trash, may be in an unprotected category; the target
-must have no automations, saved views, storage paths or email accounts, no selected
-preset, and at most its neutral Inbox. Completed initial setup also prevents
-replacement of the original archive. The protected Inbox row is retained.
-
-Last-import ID, revision, source hash and authoring snapshot are system-scoped
-provenance, not an immutable import history or a promise that the current tree
-matches that file. An unchanged revision/hash does not by itself make import a
-no-op; missing requested starters may still be added.
-
-## 6. Filing addresses and document identity
-
-Suchi uses `SYS.AC.ID`, for example `S01.13.147`. `AC` is the two-digit category
-code, **not** a three-digit `ACC` field. The canonical syntax is:
+The two forms are:
 
 ```text
-^([A-Z][0-9]{2})\.([0-9]{2})\.([1-9][0-9]*)$
+^([0-9]0)\.([0-9]{2})$
+^([A-Z][0-9]{2})\.([0-9]{2})$
 ```
 
-The final component MUST also fit positive signed 64-bit range:
-**1–9,223,372,036,854,775,807**. It is the existing installation-global
-`documents.id`, across all systems—not a category-local folder counter, authored
-seed ID or new namespace-local ID. IDs need not be consecutive; automatic
-allocation does not reuse IDs allocated after the taxonomy schema upgrade.
-Surviving beta.2 IDs are preserved. Numbers purged before that upgrade have no
-retained allocation history and may be reused; the nonreuse guarantee is
-prospective. New versions and split children receive their own document IDs under
-Suchi's existing behavior.
-
-All addresses below are illustrative and assume Suchi has **already returned** the
-stated document IDs; no authoring file reserves them:
+In `AREA.AC`, the first part MUST be a decade start (`00`, `10`, … `90`) and
+MUST match the category's decade: `20.21` is fine, `10.21` isn't. `40.49` is the
+generated Inbox before systems exist. In `SYS.AC`, the system code follows the
+same A00 to Z99 rule as files, and the area is implied.
 
 | Address | Meaning |
 | --- | --- |
-| `S01.13.147` | Document 147 currently filed in S01/category 13. |
-| `S02.13.148` | Different document 148 in another system's category 13. |
-| `S01.14.147` | Document 147 after a same-system correction/refile to category 14. |
-| `A00.49.1` | Valid syntax for a document currently in a named system's generated Inbox. |
+| `20.21` | Category 21 in area 20–29 of the unnamed single archive. |
+| `40.49` | The unnamed archive's generated Inbox. |
+| `S01.13` | Category 13 in system S01. |
+| `S02.13` | A different category 13, owned by system S02. |
 
-Refile changes the address, not document identity. The old address is stale, with
-no historical-location alias. Existing numeric document URLs retain identity and
-can resolve the current location subject to authorization. The address resolver
-`GET /api/jd/resolve?address=S01.13.147` returns `{id,system_code,jd_address}` only
-for the matching live, viewable document and its current category. Malformed input
-is 400 `bad_address`; stale, missing, trashed or inaccessible locations are 404.
+An address points at a category, not at one document. Any number of documents
+can share a `jd_address`. Each document's own number, `documents.id`, and its
+numeric URL are what identify it exactly. Refiling a document changes its
+address and leaves its number alone. The old and new addresses both keep working
+for as long as those categories exist. New versions and split pages get their
+own document numbers, as they always have.
 
-`S01.13.01`, `S01.13.0`, signed or overflowing IDs, whitespace, lowercase SYS,
-`AUD.13.147`, `S01.3.147` and suffixed extensions such as `S01.13.147/1` are not
-accepted aliases. Syntax permits AC 00–99; syntax alone does not establish an
-existing or authorable category. Search `jd:13` remains a category filter within
-the current system, not a full-address lookup.
+`GET /api/jd/resolve?address=S01.13` returns
+`{system_code, jd_category_id, jd_address}` for a category that exists, but only
+if you're allowed into its system and the address fits any explicit request or
+token limit. `20.21` resolves only while the original system is still unnamed and
+the stored area and category match. Resolving an address grants no access to
+documents; the Documents query that follows applies document visibility in SQL.
+A malformed address returns 400 `bad_address`. A missing or off-limits system or
+category returns 404 and never shows another system's labels.
 
-## 7. Johnny.Decimal foundations and Suchi adaptations
+Suchi doesn't accept near misses: no whitespace, no lowercase system codes, no
+one- or three-digit parts, no Unicode lookalike digits, no mismatched forms like
+`10.21`, and no old three-part values like `S01.13.147`. Searching `jd:13`
+still filters by category inside the selected system. It isn't an address
+lookup.
+
+## 6. Johnny.Decimal, and where Suchi differs
 
 The official [AC.ID notation](https://johnnydecimal.com/documentation/acid-notation)
-uses System, Area, Category and ID; [multiple-systems overview](https://johnnydecimal.com/documentation/multiple-systems-overview)
-specifies A00–Z99. Its [guidelines](https://johnnydecimal.com/documentation/multiple-systems-guidelines)
-recommend the extension for distinct systems rather than merely because one is
-full. The following differences are intentional Suchi design choices, not claims
-that official JD prescribes Suchi's database or permissions.
+has System, Area, Category and ID, and the
+[multiple-systems overview](https://johnnydecimal.com/documentation/multiple-systems-overview)
+uses A00 to Z99 for systems. The
+[guidelines](https://johnnydecimal.com/documentation/multiple-systems-guidelines)
+suggest a new system for genuinely separate things, not just because one has
+filled up. Suchi differs in the ways below on purpose. None of this claims that
+Johnny.Decimal tells you how to build Suchi's database or permissions.
 
-| Topic | Official guidance | Suchi adaptation and rationale |
+| Topic | Official guidance | What Suchi does, and why |
 | --- | --- | --- |
-| Hierarchy and analogy | [Introduction](https://johnnydecimal.com/documentation/introduction): room/computer, cabinet/area, drawer/category, manila folder/ID. | System → area → category → documents. “Choose a filing cabinet” is Suchi's simplified system-selection analogy, not the exact official hierarchy. It retains the existing two-level filing UI. |
-| Final ID | [IDs](https://johnnydecimal.com/documentation/ids): a two-digit category-local counter identifies a folder that can contain several related items. | A positive global document number identifies one Suchi document row. This preserves numeric links, avoids another allocation workflow and removes a 99-document category cap; it is not canonical JD ID-folder semantics. |
-| Management zeros | [The standard zeros](https://johnnydecimal.com/documentation/the-standard-zeros): system/area/category management, including 00.00 JDex and 00.01 Inbox; current prose adds .05 AI on 2026-09-07. | Reserve filesystem 00–09 for the index, generate category 49 in area 40 for Inbox. This preserves Suchi's protected Inbox and every-document-has-category invariant, without implementing the full management-ID hierarchy. |
-| Index | [The JDex](https://johnnydecimal.com/documentation/the-jdex): master record of assigned IDs, with locations/notes; explicitly not an inventory of every document. | A generated area/category map, not an assigned-ID register. It can be rebuilt from managed state, without requiring a manually authored note for every document. Neither index is a full document backup. |
-| System root | Official multiple-system examples include code and name in the root. | Stable `rendered/<SYS>/`, code only; editable display names do not move every document. |
-| Isolation | Official notation organizes and disambiguates information. | System membership plus existing document ACLs is an application boundary; a prefix alone grants no permission or regulatory assurance. |
-| Flat layout | Official JD uses area/category/ID organization. | Authoring shorthand is normalized to areas/categories; separate runtime flat rendering remains a Suchi feature, not an alternative official JD standard. |
+| Hierarchy | [Introduction](https://johnnydecimal.com/documentation/introduction): room or computer, cabinet as area, drawer as category, manila folder as ID. | System, area, category, then documents. "Choose a filing cabinet" is Suchi's simpler way to describe picking a system, not the official hierarchy. The two-level filing UI stays as it is. |
+| The ID | [IDs](https://johnnydecimal.com/documentation/ids): a two-digit counter inside a category names a folder that can hold several related items. | Suchi leaves out that layer. Many documents can share a category address, and each document keeps its own global number, so API links stay exact and a category isn't capped at 99 documents. |
+| Management zeros | [The standard zeros](https://johnnydecimal.com/documentation/the-standard-zeros): management at system, area and category level, including 00.00 JDex and 00.01 Inbox. A .05 AI entry was added on 2026-09-07. | 00–09 holds the generated index on disk, and the Inbox is category 49 in area 40. That keeps Suchi's protected Inbox and its rule that every document has a category, without building the whole management hierarchy. |
+| Index | [The JDex](https://johnnydecimal.com/documentation/the-jdex): the master record of assigned IDs, with locations and notes. It's explicitly not a list of every document. | A generated map of areas and categories, not a register of assigned IDs. Suchi can rebuild it from its own state, and you never write a note per document. Neither index is a backup. |
+| System root | Official examples put both code and name in the folder name. | `rendered/<SYS>/`, code only. Renaming a system doesn't move every document on disk. |
+| Isolation | The notation organizes and disambiguates. | System membership plus document ACLs form an application boundary. A prefix by itself grants nothing and proves nothing to a regulator. |
+| Flat layout | Official JD always uses areas, categories and IDs. | Flat authoring becomes areas and categories on import. Runtime flat rendering is a Suchi feature, not an alternative JD standard. |
 
-Suchi does not implement every official zero, ID extension, folder workflow or
-future JD convention by accepting the same SYS syntax. The linked primary
-sources, rather than this adaptation, define official Johnny.Decimal usage.
+Accepting the same system syntax doesn't mean Suchi implements every official
+zero, ID extension, folder workflow or future convention. For how
+Johnny.Decimal is meant to be used, read the linked sources, not this page.
 
-## 8. Access and trust boundaries
+## 7. Access and trust
 
-For an ordinary object operation, authorization requires:
+For an ordinary operation on an object, all three must hold:
 
 ```text
-actual system matches any explicit request and token boundary
-AND active user can enter that system
-AND existing document/object permission allows the operation
+the object's system matches any explicit request and token boundary
+AND the user is active and can enter that system
+AND the document or object permission allows the operation
 ```
 
-Membership is direct user membership, with no per-system roles. Instance admins
-bypass membership and document ACLs, **not** actual object existence, explicit
-system mismatches or a token's bound system. Document ownership, direct/group ACLs
-or workflow assignment do not independently grant system entry. Membership alone
-does not grant every document. A new user ACL grant MUST target an active user
-who can enter the object's system; a grant to a nonmember is rejected. Retained
-grants become ineffective when membership is removed. A partner admitted to both
-systems still needs document permission.
+Membership is direct, per user, with no per-system roles. Instance admins skip
+membership and document ACL checks. They do **not** skip whether the object
+exists, an explicit system mismatch, or the system a token is bound to. Owning a
+document, holding a direct or group ACL, or being assigned in a workflow doesn't
+get you into its system. Membership alone doesn't get you every document either.
+A new ACL grant to a user MUST target an active user who can enter that system;
+granting to a non-member is rejected. If membership is removed, any grants left
+behind stop working. A partner who belongs to both systems still needs document
+permission in each.
 
-Unqualified session collections target original system 1, not an arbitrary
-accessible system. A browser may explicitly select an accessible system and put
-that selection in its route/request; this is not an API fallback. Unqualified
-numeric object requests derive the object's actual system. Tokens use one bound
-system as both default and ceiling; an external token without a binding is
-restricted to the original system. Scope names do not replace membership or ACLs.
+Unqualified session requests for collections go to original system 1, not to
+whichever system you happen to have access to. A browser can explicitly select a
+system and put it in the route or request; that's a choice, not an API fallback.
+A request for a numeric object without a system uses the object's own system.
+A token is bound to one system, which is both its default and its limit. An
+external token with no binding is limited to the original system. Scope names
+don't replace membership or ACLs.
 
-System-unavailable and object-not-found responses do not expose foreign labels.
-A user with no memberships needs an administrator grant, not a silent fallback.
-Membership removal makes retained document grants ineffective and atomically
-revokes the user's shares, system-bound API tokens and outstanding mobile pairings
-for that system. Re-admission does not revive those credentials. Mutations and
-receipt replay recheck authority in their write transaction; already delivered
-bytes cannot be retracted.
+"System unavailable" and "not found" responses never show another system's
+labels. A user with no memberships needs an admin to add them; there's no silent
+fallback. Removing a membership makes leftover grants useless and, in the same
+step, revokes that user's shares, system-bound API tokens and pending mobile
+pairings for the system. Adding them back doesn't bring those credentials back.
+Writes and receipt replays check authority again inside their write
+transaction. Bytes already downloaded can't be taken back.
 
-Documents and namespace-owned metadata do not change systems through ordinary
-updates, automations, sidecars or taxonomy import. Version/split/email families
-inherit system ownership. A same-user membership in two systems does not make
-foreign category/tag/type IDs valid metadata assignments. The deliberate exception
-is an authenticated document-link write: the actor must be allowed to change the
-source and view the target in their respective systems. Actorless automation
-links remain same-system only. Per-document custom-field values currently have no
-API/UI read projection; field-definition listing is a separate capability. Before
-adding a value read projection, the implementation MUST recheck target visibility
-and redact inaccessible document links. Read-time redaction is not claimed as an
-implemented v1 capability.
+Documents and system-owned metadata don't move between systems through ordinary
+edits, automations, sidecars or taxonomy imports. Versions, split pages and
+email families belong to the same system as their source. Being a member of two
+systems doesn't let you assign one system's category, tag or type IDs to a
+document in the other. The one deliberate exception is a document link written
+by an authenticated user, who must be allowed to change the source and view the
+target in their own systems. Automations, which act without a user, can only link
+within one system. There's currently no API or UI that reads per-document custom
+field values; listing field definitions is separate. Before one is added, it MUST
+recheck whether the reader can see each linked document and hide the ones they
+can't. That read-time redaction is not something v1 claims to do today.
 
-A share contains documents from one system and remains a deliberate bearer
-credential; public access rechecks the creator's active system entry and current
-shareability. Mobile pairing/API token issuance captures one system, not all
-systems. An OAuth mailbox creation handoff named `sealed_secret_b64` is authenticated,
-actor- and system-bound server handoff data, not arbitrary reusable at-rest
-ciphertext. Sidecar `jd_system` must match the configured intake target and cannot
-route into or create another system.
+A share holds documents from one system and is a bearer credential on purpose.
+Public access checks again that the creator can still enter the system and that
+the documents can still be shared. Mobile pairing and API token issuance each
+capture one system, never all of them. The OAuth mailbox handoff field
+`sealed_secret_b64` is authenticated server-side data tied to one actor and one
+system, not reusable ciphertext. A sidecar's `jd_system` must match the
+configured intake target, and it can't route into, or create, another system.
 
-Systems share the server process, SQLite/FTS infrastructure and content-addressed
-blob store. Server administrators, host operators and backup holders remain
-trusted; SYS is not separate infrastructure, per-system encryption, administrator
-exclusion, measured security certification or proof of professional independence.
-Configuration, users/groups and server-wide services remain instance-wide. Copies,
-backups and data already disclosed need their own controls.
+Systems share the server process, the SQLite and FTS database, and the
+content-addressed blob store. Server admins, the people running the host, and
+anyone holding a backup are trusted. A system is not separate infrastructure,
+per-system encryption, a way to keep admins out, a security certification or
+proof of professional independence. Configuration, users, groups and server-wide
+services are shared across the instance. Copies, backups and anything already
+shared need their own controls.
 
-## 9. Rendered tree, exports and recovery
+## 8. Rendered tree, exports and recovery
 
-Before introduction, existing default paths have no SYS root or full-address
-suffix. Afterwards each system is projected beneath the immutable code root;
-default JD layout retains area/category/year/date-title grouping and a full-address
-suffix. Current default templates use `.pdf`; explicit templates can differ.
-`jd.system.code`, `jd.system.name` and `jd.address` are template values. The system
-root is enforced outside user templates; absolute/traversing paths and managed
-index collisions are rejected.
+Before systems exist, document paths have no system folder. Afterwards, each
+system renders under its permanent code. Either way, the file name ends with
+`__<doc_pk>`, the document's global number. The default layout groups by area,
+category, year, then date and title. Custom templates can differ.
+`jd.system.code`, `jd.system.name` and `jd.address` are available to templates,
+but `jd.address` is per category and repeats, so a layout that must avoid
+collisions also needs `doc_pk`, or `asn` where the layout already requires a
+unique archive serial number. Suchi adds the system folder itself, outside your
+template, and rejects absolute paths, `..` escapes, and paths that collide with
+its managed index.
 
-Illustrative paths, assuming those document IDs were already returned:
+What documents 147 and 148 might look like on a fresh render:
 
 ```text
 rendered/
   S01/
     00-09 System index/00.00 archive.huml
     10-19 Client document kinds/
-      13 GST filings/2026/2026-07-31 GST return__S01.13.147.pdf
+      13 GST filings/2026/2026-07-31 GST return__147.pdf
   S02/
     00-09 System index/00.00 archive.huml
     10-19 Client document kinds/
-      13 GST filings/2026/2026-07-31 GST return__S02.13.148.pdf
+      13 GST filings/2026/2026-07-31 GST return__148.pdf
 ```
 
-The managed index is a generated HuML tree snapshot with `system`, `id="archive"`,
-`version=1`, current display name and tree metadata. It omits keyword/starter rules,
-documents, memberships and grants. Its fixed snapshot ID/revision are not the
-last imported source ID/revision; import provenance is retained separately in the
-system record. It is neither an authoring-starter backup nor a complete JDex
-assigned-folder register.
+Switching to these paths doesn't rewrite your stored templates or old rendered
+links, and it doesn't queue a pass over the whole archive. Older multi-system
+renders that used a three-part suffix aren't supported; fresh renders use the
+paths above.
 
-Index publication uses managed ownership checks and atomic replacement; failures
-retain the last good file. Refresh is queued per system and at startup. First
-introduction queues render-only moves, not OCR/classification/automation reruns.
-Only the original system's index writer removes the proved-managed former root
-index after its replacement succeeds. Unknown user files/directories are not
-permission to overwrite or recursively clean. Rendered links and the index are
-rebuildable projections, not immutable originals.
+The managed index, `00.00 archive.huml`, is a generated HuML snapshot of the
+tree: `system`, `id = "archive"`, `version = 1`, the current display name and
+the tree with its descriptions. It doesn't list documents, memberships or
+grants. Its fixed ID and revision are not the last imported file's; that
+provenance lives separately on the system record. It isn't a copy of your
+authoring file and it isn't a JDex register of assigned folders.
 
-| Artifact | What it preserves / does not preserve |
+Suchi writes the index only to paths it can prove it manages, and replaces it
+atomically. If a write fails, the last good file stays. Refreshes are queued per
+system and again at startup. Introducing systems for the first time queues
+render-only moves, not OCR, classification or automation reruns. Only the
+original system's index writer removes the old root-level index, and only after
+the new one is in place and the old one is proved to be Suchi's. Files and
+folders Suchi doesn't recognize are never overwritten or swept up. The rendered
+tree and its index are rebuildable projections, not originals.
+
+| What you have | What it keeps, and what it doesn't |
 | --- | --- |
-| Taxonomy export | One system's current portable tree, named `<SYS>.taxonomy.huml` or `.toml` after introduction (`archive.huml`/`.toml` before). Snapshot metadata uses `archive`, revision 1, global market and undetermined language. |
-| Taxonomy export with starters | Only representable preset-owned rules, not every automation or user-owned fork. Disabled/unrepresentable rules or unresolved references produce errors rather than silent lossy conversion. Keyword-derived rules export as explicit starters, not reconstructed keywords. |
-| Tree-only export / managed index | Omits both keywords and starters; not a faithful copy of the original authoring file or complete provenance record. |
-| Native takeout | Partial selected-system export, manifest version `2` carrying system code/name, original bytes and metadata; sidecar format remains `1` with optional `jd_system`/`jd_address`. `--all` means all owners in the selected system. This is not a restore protocol; reimport may allocate new document IDs and source addresses are not promises of destination identity. |
-| Full backup | Consistent database, blobs, credential key and operator configuration. This is the route to preserving systems, memberships, IDs, relationships and ID-allocation state exactly; protect it as privileged data. |
+| Taxonomy export | One system's current tree, nothing else: no automations, permissions, review history or documents. TOML by default, HuML on request. Named `<SYS>.taxonomy.toml` (or `.huml`) once systems exist, and `archive.toml` (or `.huml`) before. The snapshot uses `id = "archive"`, `version = 1`, a global market and an undetermined language. |
+| Managed index | The same tree, as HuML, kept current on disk. Not your original authoring file and not a provenance record. |
+| Native takeout | Documents from the selected system: manifest version `3` with the system code and name, original bytes and metadata. Sidecar format stays `1`, with optional `jd_system` and `jd_address`. `jd_address` is informational, can repeat, and is ignored for routing on intake. `--all` means every owner in the selected system. It isn't a restore protocol; reimporting may give documents new numbers. |
+| Full backup | Database, blobs, credential key and operator configuration, taken consistently. This is the only way to keep systems, memberships, document numbers, relationships and number allocation exactly as they were. Treat it as privileged data. |
 
-Neither passing syntax validation nor successfully importing a taxonomy establishes
-security/compliance/domain correctness. Review the [CA walkthrough](examples/in-ca-firm.md)
-and [multi-system use cases](examples/multi-system-use-cases.md) before choosing
-boundaries for real records.
+Passing validation, or importing a tree successfully, tells you nothing about
+security, compliance or whether the categories suit your records. Read the
+[CA walkthrough](examples/in-ca-firm.md) and the
+[multi-system use cases](examples/multi-system-use-cases.md) before you decide
+where the boundaries go for real documents.

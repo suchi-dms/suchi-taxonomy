@@ -15,19 +15,16 @@ version = 1
     code = 11
     name = "Incorporation and statutory registers"
     description = "Incorporation certificates, articles and statutory register records."
-    keywords = ["certificate of incorporation", "register of members"]
 
   [[areas.categories]]
     code = 12
     name = "Confirmation statements"
     description = "Filed confirmation statements and Companies House acknowledgements."
-    keywords = ["confirmation statement", "CS01"]
 
   [[areas.categories]]
     code = 13
     name = "Contracts"
     description = "Executed client, supplier and other company agreements."
-    keywords = ["services agreement", "supplier agreement"]
 
 [[areas]]
   code = 20
@@ -37,25 +34,21 @@ version = 1
     code = 21
     name = "Corporation tax"
     description = "Company tax returns, computations and payment evidence."
-    keywords = ["CT600"]
 
   [[areas.categories]]
     code = 22
     name = "VAT"
     description = "VAT returns, calculations and filing acknowledgements."
-    keywords = ["VAT return"]
 
   [[areas.categories]]
     code = 23
     name = "PAYE and payroll"
     description = "Payroll submissions, payslips and employer payment records."
-    keywords = ["full payment submission", "employer payment summary"]
 
   [[areas.categories]]
     code = 24
     name = "Dividends"
     description = "Dividend vouchers and supporting board decisions."
-    keywords = ["dividend voucher"]
 
 [[areas]]
   code = 30
@@ -65,16 +58,13 @@ version = 1
     code = 31
     name = "Bank statements and reconciliations"
     description = "Company account statements and reconciliations; distinguish accounts with metadata."
-    keywords = ["bank reconciliation"]
 
   [[areas.categories]]
     code = 32
     name = "Expense invoices and receipts"
     description = "Supplier invoices and receipts supporting company expenditure."
-    keywords = ["supplier invoice", "expense receipt"]
 
   [[areas.categories]]
     code = 33
     name = "Director expense claims and loans"
     description = "Reimbursements, expense claims and director loan account evidence."
-    keywords = ["director loan account", "director expense claim"]

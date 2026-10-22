@@ -1,3 +1,4 @@
+%HUML v0.2.0
 format: "suchi-taxonomy/v1"
 id: "de-household"
 version: 1
@@ -16,12 +17,10 @@ areas::
         code: 11
         name: "Ausweise und Urkunden"
         description: "Identitätsdokumente und standesamtliche Urkunden; Personen als Korrespondenten führen."
-        keywords:: "Geburtsurkunde", "Personalausweis"
       - ::
         code: 12
         name: "Gesundheit"
         description: "Arztbriefe, Befunde und Abrechnungen; sensible Zugriffe separat regeln."
-        keywords:: "Arztbrief", "Laborbefund"
   - ::
     code: 20
     name: "Geld"
@@ -30,23 +29,18 @@ areas::
         code: 21
         name: "Steuerbescheide"
         description: "Steuererklärungen, Bescheide und zugehörige Nachweise."
-        keywords::
-          - "Einkommensteuerbescheid"
       - ::
         code: 22
         name: "Versicherungen"
         description: "Versicherungsscheine, Beitragsrechnungen und Schadenunterlagen."
-        keywords:: "Versicherungsschein", "Beitragsrechnung"
       - ::
         code: 23
         name: "Bank und Verträge"
         description: "Kontoauszüge und Finanzverträge."
-        keywords:: "Kontoauszug", "Darlehensvertrag"
       - ::
         code: 24
         name: "Rente"
         description: "Renteninformationen, Versicherungsverläufe und Rentenbescheide."
-        keywords:: "Renteninformation", "Versicherungsverlauf"
   - ::
     code: 30
     name: "Wohnen"
@@ -55,9 +49,7 @@ areas::
         code: 31
         name: "Mietvertrag und Nebenkosten"
         description: "Mietverträge, Übergabeprotokolle und Betriebskostenabrechnungen."
-        keywords:: "Betriebskostenabrechnung", "Wohnungsübergabeprotokoll"
       - ::
         code: 32
         name: "Strom und Internet"
         description: "Versorgungsverträge, Rechnungen und Kündigungsbestätigungen."
-        keywords:: "Stromabrechnung", "Internetvertrag"

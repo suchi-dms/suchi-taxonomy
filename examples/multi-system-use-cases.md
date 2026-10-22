@@ -10,10 +10,10 @@ Suchi, a SYS prefix, a separate server or this proposed filing tree. They do not
 measure how many mid-scale firms need multiple systems.
 
 All company names, people, shared staff/server arrangements, category choices and
-addresses below are **illustrative**, unless a source is specifically described as
-discussing that type of arrangement. Each address assumes that Suchi has **already
-returned** the illustrated positive installation-global document ID. These are not
-observed uploads, authored IDs, category-local counters or promises of allocation.
+filing addresses below are **illustrative**, unless a source specifically describes
+that type of arrangement. Addresses identify categories and can repeat across
+documents; any numeric document IDs mentioned are separate Suchi identities, not
+authored IDs, category-local counters or promises of allocation.
 The named categories in these sketches are proposed examples, not additional
 complete authoring templates or categories prescribed by law.
 
@@ -50,10 +50,10 @@ Advisory **N02** as separate managed archives, with category 11 for engagement
 letters in each:
 
 ```text
-N01 Northmere Audit       / 10-19 Engagement records / 11 Engagement letters
-  N01.11.147             audit engagement letter, returned document ID 147
-N02 Northmere Advisory    / 10-19 Engagement records / 11 Engagement letters
-  N02.11.148             advisory engagement letter, returned document ID 148
+N01 Northmere Audit       / 10-19 Engagement records / N01.11 Engagement letters
+  document 147            audit engagement letter
+N02 Northmere Advisory    / 10-19 Engagement records / N02.11 Engagement letters
+  document 148            advisory engagement letter
 ```
 
 Admit only the appropriate direct members to each system and apply document ACLs
@@ -86,11 +86,12 @@ than carrying the old PDF's qualification rules into a filing guide. This is
 Nebraska-specific guidance, not a national US CPA rule.
 
 **Illustrative Suchi organization.** Prairie CPA **P01** and Prairie Advisory
-**P02** could use separate engagement-letter archives: **P01.11.149** and
-**P02.11.150**, assuming returned document IDs 149 and 150. The source supports
-clear service-provider attribution; it neither approves these fictional firms nor
-authorizes unrestricted information sharing. SYS does not establish professional
-independence, firm licensing or a lawful APS.
+**P02** could use separate engagement-letter categories **P01.11** and
+**P02.11**. Documents filed there retain separate numeric IDs and can share each
+category address. The source supports clear service-provider attribution; it
+neither approves these fictional firms nor authorizes unrestricted information
+sharing. SYS does not establish professional independence, firm licensing or a
+lawful APS.
 
 **Nearby non-case.** Clients, services or staff teams within the licensed firm do
 not automatically become separate systems. Preserve the actual provider identity
@@ -113,14 +114,15 @@ Fenbridge Homes **H01** and Fenbridge Commercial **C01**, distinct property-owni
 companies. Give each its own tree and company-specific lease records:
 
 ```text
-H01 Fenbridge Homes       / 10-19 Property records / 11 Leases / H01.11.201
-C01 Fenbridge Commercial  / 10-19 Property records / 11 Leases / C01.11.202
+H01 Fenbridge Homes       / 10-19 Property records / H01.11 Leases
+C01 Fenbridge Commercial  / 10-19 Property records / C01.11 Leases
 ```
 
-The final numbers assume already-returned IDs 201 and 202. The leases are
-illustrative relevant contracts; s386 does not prescribe category 11 or require
-separate filing systems/servers. A shared operator can be admitted to both systems
-without making company metadata or document permissions global.
+Illustrative lease documents 201 and 202 would keep those numeric identities
+separately from the category addresses. The leases are relevant contracts; s386
+does not prescribe category 11 or require separate filing systems/servers. A
+shared operator can be admitted to both systems without making company metadata
+or document permissions global.
 
 **Nearby non-case.** Several properties, tenants or maintenance suppliers belonging
 to one company need not each become a system. Use asset/counterparty metadata
@@ -145,10 +147,11 @@ company. This is the retrieved **2025 edition**, not a claim that the September
 
 **Illustrative Suchi organization.** Assume Mesa Coffee **F01** and Mesa Fitness
 **F02** are distinct operating businesses, not merely two brands of one undivided
-operation. A central administrator might file royalty statements as
-**F01.21.301** and **F02.21.302** (returned document IDs 301 and 302), in each
-system's `20-29 Business money / 21 Royalty statements` category. Same-named
-franchisor correspondents or rule starters remain system-scoped.
+operation. A central administrator might file royalty statements in category
+addresses **F01.21** and **F02.21**, each system's
+`20-29 Business money / 21 Royalty statements` category. Same-named franchisor
+correspondents or rules remain system-scoped; individual documents keep
+their separate numeric IDs.
 
 The legal/accounting identity is an explicit assumption in this illustration;
 two franchise brands alone do not establish it. Neither source mandates the SYS
@@ -173,10 +176,11 @@ texts; they are not official translations.
 
 **Illustrative Suchi organization.** Posit Eichenwerk Maschinenbau **G01** and
 Eichenwerk Immobilien **G02** as distinct companies. Their annual accounts could
-be **G01.21.401** and **G02.21.402** (returned IDs 401 and 402), under each tree's
-`20-29 Company money / 21 Annual accounts`. The source supports company-specific
-identity, bookkeeping and inspection responsibilities; these provisions are not a
-complete accounts-preparation or retention schedule.
+use category addresses **G01.21** and **G02.21** under each tree's
+`20-29 Company money / 21 Annual accounts`; each account document retains its
+separate numeric identity. The source supports company-specific identity,
+bookkeeping and inspection responsibilities; these provisions are not a complete
+accounts-preparation or retention schedule.
 
 A common administrator may help both firms while system-scoped membership and
 document permissions separate ordinary access. Do not translate shareholder
@@ -207,16 +211,17 @@ is not itself a retention schedule or separate-server requirement.
 
 ```text
 T01 Wattle Administration as trustee for Family Trust
-  10-19 Trust governance / 11 Executed deeds / T01.11.501
+  10-19 Trust governance / T01.11 Executed deeds
 T02 Wattle Administration as trustee for Property Unit Trust
-  10-19 Trust governance / 11 Executed deeds / T02.11.502
+  10-19 Trust governance / T02.11 Executed deeds
 ```
 
-These are assumed returned IDs 501 and 502. The distinction is one legal person's
-two trustee capacities, not two newly invented legal persons. A shared
-administrator can select the appropriate capacity before intake and receive
-membership only where appropriate; SYS cannot decide the legal capacity in which
-a document was executed or cure misattribution.
+Illustrative deed documents 501 and 502 keep those numeric identities separately
+from the category addresses. The distinction is one legal person's two trustee
+capacities, not two newly invented legal persons. A shared administrator can
+select the appropriate capacity before intake and receive membership only where
+appropriate; SYS cannot decide the legal capacity in which a document was
+executed or cure misattribution.
 
 **Nearby non-case.** Beneficiaries, properties, investment accounts or income
 streams within one trustee capacity do not automatically become systems. A new
@@ -241,10 +246,11 @@ necessary. Shared resources do not erase distinct responsibilities.
 
 **Illustrative Suchi organization.** Beacon Learning **E01**, an education charity,
 and Beacon Events **E02**, its trading subsidiary, might file governance minutes
-as **E01.11.601** and **E02.11.602** (returned IDs 601 and 602), in each tree's
-`10-19 Governance / 11 Minutes`. Posit shared administrative staff, but admit them
-to each archive only as appropriate and keep beneficiary/donor document permissions
-separate from the trading team's needs.
+under category addresses **E01.11** and **E02.11** in each tree's
+`10-19 Governance / 11 Minutes`. Individual minutes retain separate numeric IDs.
+Posit shared administrative staff, but admit them to each archive only as
+appropriate and keep beneficiary/donor document permissions separate from the
+trading team's needs.
 
 Neither SYS nor a corporate connection creates a lawful basis for unrestricted
 personal-data sharing. The [ICO's lawful-basis guidance](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/data-sharing-a-code-of-practice/lawful-basis-for-sharing-personal-data/)

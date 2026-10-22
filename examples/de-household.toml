@@ -15,13 +15,11 @@ version = 1
     code = 11
     name = "Ausweise und Urkunden"
     description = "Identitätsdokumente und standesamtliche Urkunden; Personen als Korrespondenten führen."
-    keywords = ["Geburtsurkunde", "Personalausweis"]
 
   [[areas.categories]]
     code = 12
     name = "Gesundheit"
     description = "Arztbriefe, Befunde und Abrechnungen; sensible Zugriffe separat regeln."
-    keywords = ["Arztbrief", "Laborbefund"]
 
 [[areas]]
   code = 20
@@ -31,25 +29,21 @@ version = 1
     code = 21
     name = "Steuerbescheide"
     description = "Steuererklärungen, Bescheide und zugehörige Nachweise."
-    keywords = ["Einkommensteuerbescheid"]
 
   [[areas.categories]]
     code = 22
     name = "Versicherungen"
     description = "Versicherungsscheine, Beitragsrechnungen und Schadenunterlagen."
-    keywords = ["Versicherungsschein", "Beitragsrechnung"]
 
   [[areas.categories]]
     code = 23
     name = "Bank und Verträge"
     description = "Kontoauszüge und Finanzverträge."
-    keywords = ["Kontoauszug", "Darlehensvertrag"]
 
   [[areas.categories]]
     code = 24
     name = "Rente"
     description = "Renteninformationen, Versicherungsverläufe und Rentenbescheide."
-    keywords = ["Renteninformation", "Versicherungsverlauf"]
 
 [[areas]]
   code = 30
@@ -59,10 +53,8 @@ version = 1
     code = 31
     name = "Mietvertrag und Nebenkosten"
     description = "Mietverträge, Übergabeprotokolle und Betriebskostenabrechnungen."
-    keywords = ["Betriebskostenabrechnung", "Wohnungsübergabeprotokoll"]
 
   [[areas.categories]]
     code = 32
     name = "Strom und Internet"
     description = "Versorgungsverträge, Rechnungen und Kündigungsbestätigungen."
-    keywords = ["Stromabrechnung", "Internetvertrag"]

@@ -1,3 +1,4 @@
+%HUML v0.2.0
 format: "suchi-taxonomy/v1"
 id: "in-landlord"
 version: 1
@@ -16,17 +17,14 @@ areas::
         code: 11
         name: "Ownership and registry"
         description: "Conveyances, registration acknowledgements and ownership extracts."
-        keywords:: "sale deed", "encumbrance certificate"
       - ::
         code: 12
         name: "Property tax"
         description: "Assessments and payment receipts for local property taxes."
-        keywords:: "property tax receipt", "property tax assessment"
       - ::
         code: 13
         name: "Society and maintenance"
         description: "Society permissions, maintenance demands and repair records."
-        keywords:: "society no objection certificate", "maintenance demand"
   - ::
     code: 20
     name: "Tenancy records"
@@ -35,16 +33,11 @@ areas::
         code: 21
         name: "Agreements"
         description: "Executed lease or leave-and-licence agreements and amendments."
-        keywords:: "leave and license agreement", "residential lease agreement"
       - ::
         code: 22
         name: "Police verification and KYC"
         description: "Tenant verification acknowledgements and identity evidence; restrict access separately."
-        keywords::
-          - "tenant police verification"
       - ::
         code: 23
         name: "Rent receipts"
         description: "Issued rent receipts and rent-payment evidence."
-        keywords::
-          - "rent receipt"

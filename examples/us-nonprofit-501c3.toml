@@ -15,13 +15,11 @@ version = 1
     code = 11
     name = "Determination letter and EIN"
     description = "IRS determination, EIN assignment and status correspondence."
-    keywords = ["determination letter", "CP 575"]
 
   [[areas.categories]]
     code = 12
     name = "Form 990 filings"
     description = "Filed annual information returns and acknowledgements."
-    keywords = ["Form 990", "Form 990-EZ"]
 
 [[areas]]
   code = 20
@@ -31,13 +29,11 @@ version = 1
     code = 21
     name = "Bylaws and policies"
     description = "Current and historical bylaws, conflict policies and approved governance policies."
-    keywords = ["conflict of interest policy", "bylaws"]
 
   [[areas.categories]]
     code = 22
     name = "Board minutes"
     description = "Board decisions, approved minutes and supporting resolutions."
-    keywords = ["board meeting minutes"]
 
 [[areas]]
   code = 30
@@ -47,16 +43,13 @@ version = 1
     code = 31
     name = "Donor acknowledgments"
     description = "Contribution acknowledgments and supporting gift records."
-    keywords = ["no goods or services were provided"]
 
   [[areas.categories]]
     code = 32
     name = "Grants"
     description = "Grant agreements, award letters and reporting evidence."
-    keywords = ["grant award letter", "grant reporting requirements"]
 
   [[areas.categories]]
     code = 33
     name = "State registrations"
     description = "Charitable solicitation registrations, renewals and state correspondence."
-    keywords = ["charitable solicitation registration"]

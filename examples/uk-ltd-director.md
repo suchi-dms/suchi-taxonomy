@@ -8,12 +8,11 @@ Keep statutory company records, tax submissions and director payment evidence ap
 
 Bank statements/reconciliations, supplier expenses and director expense/loan evidence complete the banking outline. No accounting ledger, payroll calculation, dividend legality decision, HMRC submission or filing calendar. Company tax records are separate from the director’s personal tax.
 
-All categories have document-kind descriptions. Keywords are literal starter
-phrases, not measured classification accuracy; review false matches before use.
-No explicit automation seeds: category keywords provide the limited starters.
-Sensitivity defaults, review cadences, custom fields, standalone seed families,
-links and trust/access state are intentionally absent because taxonomy v1 does
-not support them. Configure permissions independently before adding real records.
+All categories have document-kind descriptions. The tree carries no keywords
+or automations; write your own matching rules in Suchi's Automations page and
+check what they catch before relying on them. Sensitivity defaults, review
+cadences, custom fields, links and trust/access state are left out because
+taxonomy v1 doesn't support them. Configure permissions independently before adding real records.
 
 ## Sources and review
 

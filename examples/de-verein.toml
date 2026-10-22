@@ -15,19 +15,16 @@ version = 1
     code = 11
     name = "Satzung und Register"
     description = "Satzung, Änderungen und Vereinsregisterauszüge."
-    keywords = ["Vereinsregisterauszug", "Satzungsänderung"]
 
   [[areas.categories]]
     code = 12
     name = "Gemeinnützigkeit"
     description = "Freistellungsbescheide und steuerliche Statusunterlagen."
-    keywords = ["Freistellungsbescheid", "Gemeinnützigkeitsbescheid"]
 
   [[areas.categories]]
     code = 13
     name = "Vorstand und Protokolle"
     description = "Wahlunterlagen, Vorstands- und Mitgliederversammlungsprotokolle."
-    keywords = ["Vorstandssitzungsprotokoll", "Mitgliederversammlungsprotokoll"]
 
 [[areas]]
   code = 20
@@ -37,19 +34,16 @@ version = 1
     code = 21
     name = "Aufnahme und Austritt"
     description = "Mitgliedsanträge, Aufnahmebestätigungen und Austrittserklärungen."
-    keywords = ["Mitgliedsantrag", "Austrittserklärung"]
 
   [[areas.categories]]
     code = 22
     name = "Mitgliederverzeichnisse und Einwilligungen"
     description = "Mitgliederlisten und dokumentierte Einwilligungen; Zugriffe separat regeln."
-    keywords = ["Mitgliederverzeichnis", "Einwilligungserklärung"]
 
   [[areas.categories]]
     code = 23
     name = "Beiträge und Mandate"
     description = "Beitragsbescheide, Zahlungsnachweise und Lastschriftmandate."
-    keywords = ["Mitgliedsbeitrag", "SEPA-Lastschriftmandat"]
 
 [[areas]]
   code = 30
@@ -59,10 +53,8 @@ version = 1
     code = 31
     name = "Kassenberichte"
     description = "Kassenberichte, Bankabstimmungen und Kassenprüfungsberichte."
-    keywords = ["Kassenprüfungsbericht", "Kassenbericht"]
 
   [[areas.categories]]
     code = 32
     name = "Zuschüsse"
     description = "Förderbescheide, Anträge und Verwendungsnachweise."
-    keywords = ["Zuwendungsbescheid", "Verwendungsnachweis"]

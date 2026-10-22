@@ -1,100 +1,133 @@
 # Suchi taxonomy examples
 
-Ten generic document-kind filing trees and two complete Sharma firm variants for
-`suchi-taxonomy/v1`, each in HuML and equivalent TOML: **12 pairs / 24 authoring
-files**. This is a static CC0 reference collection,
-not a runtime catalog, marketplace, pack repository or Suchi dependency.
+Example filing trees for [Suchi](https://github.com/johnnybravo-xyz/suchi), in
+the `suchi-taxonomy/v1` format. Each tree comes as an equivalent TOML and HuML
+pair: ten generic trees plus two entity-bound variants of the CA firm tree, for
+**12 pairs / 24 files**.
 
-All examples are **unreviewed**. They are filing suggestions, not legal advice,
-compliance checklists, practitioner-approved workflows or accuracy guarantees.
-Read the adjacent notes before enabling literal keyword starters. Only the UK
-example adds an explicit automation, to identify a document type.
+This is a static CC0 reference collection. It is not a runtime catalog, a
+marketplace, or a Suchi dependency; Suchi never fetches from it.
+
+> [!WARNING]
+> All examples are **unreviewed**. They are filing suggestions, not legal
+> advice, compliance checklists, practitioner-approved workflows or accuracy
+> guarantees. Read each tree's notes before relying on it.
 
 ## Examples
 
 | Intended user | Filing files | Sources, omissions and review status |
 | --- | --- | --- |
-| Indian CA firm | [HuML](examples/in-ca-firm.huml) · [TOML](examples/in-ca-firm.toml) | [Notes](examples/in-ca-firm.md) |
-| Indian NGO and FCRA administration | [HuML](examples/in-ngo-fcra.huml) · [TOML](examples/in-ngo-fcra.toml) | [Notes](examples/in-ngo-fcra.md) |
-| Indian residential landlord | [HuML](examples/in-landlord.huml) · [TOML](examples/in-landlord.toml) | [Notes](examples/in-landlord.md) |
-| UK residential landlord | [HuML](examples/uk-landlord.huml) · [TOML](examples/uk-landlord.toml) | [Notes](examples/uk-landlord.md) |
-| UK limited-company director | [HuML](examples/uk-ltd-director.huml) · [TOML](examples/uk-ltd-director.toml) | [Notes](examples/uk-ltd-director.md) |
-| US small landlord | [HuML](examples/us-small-landlord.huml) · [TOML](examples/us-small-landlord.toml) | [Notes](examples/us-small-landlord.md) |
-| US nonprofit 501(c)(3) | [HuML](examples/us-nonprofit-501c3.huml) · [TOML](examples/us-nonprofit-501c3.toml) | [Notes](examples/us-nonprofit-501c3.md) |
-| Deutscher Haushalt | [HuML](examples/de-household.huml) · [TOML](examples/de-household.toml) | [Notes](examples/de-household.md) |
-| Deutscher Verein | [HuML](examples/de-verein.huml) · [TOML](examples/de-verein.toml) | [Notes](examples/de-verein.md) |
-| Cross-border and expat household | [HuML](examples/global-expat.huml) · [TOML](examples/global-expat.toml) | [Notes](examples/global-expat.md) |
-| Sharma & Associates, S01 | [HuML](examples/in-ca-firm-s01.huml) · [TOML](examples/in-ca-firm-s01.toml) | [CA walkthrough](examples/in-ca-firm.md) |
-| Sharma Advisory LLP, S02 | [HuML](examples/in-ca-firm-s02.huml) · [TOML](examples/in-ca-firm-s02.toml) | [CA walkthrough](examples/in-ca-firm.md) |
+| Indian CA firm | [TOML](examples/in-ca-firm.toml) · [HuML](examples/in-ca-firm.huml) | [Notes](examples/in-ca-firm.md) |
+| Indian NGO and FCRA administration | [TOML](examples/in-ngo-fcra.toml) · [HuML](examples/in-ngo-fcra.huml) | [Notes](examples/in-ngo-fcra.md) |
+| Indian residential landlord | [TOML](examples/in-landlord.toml) · [HuML](examples/in-landlord.huml) | [Notes](examples/in-landlord.md) |
+| UK residential landlord | [TOML](examples/uk-landlord.toml) · [HuML](examples/uk-landlord.huml) | [Notes](examples/uk-landlord.md) |
+| UK limited-company director | [TOML](examples/uk-ltd-director.toml) · [HuML](examples/uk-ltd-director.huml) | [Notes](examples/uk-ltd-director.md) |
+| US small landlord | [TOML](examples/us-small-landlord.toml) · [HuML](examples/us-small-landlord.huml) | [Notes](examples/us-small-landlord.md) |
+| US nonprofit 501(c)(3) | [TOML](examples/us-nonprofit-501c3.toml) · [HuML](examples/us-nonprofit-501c3.huml) | [Notes](examples/us-nonprofit-501c3.md) |
+| Deutscher Haushalt | [TOML](examples/de-household.toml) · [HuML](examples/de-household.huml) | [Notes](examples/de-household.md) |
+| Deutscher Verein | [TOML](examples/de-verein.toml) · [HuML](examples/de-verein.huml) | [Notes](examples/de-verein.md) |
+| Cross-border and expat household | [TOML](examples/global-expat.toml) · [HuML](examples/global-expat.huml) | [Notes](examples/global-expat.md) |
+| Sharma & Associates, system `S01` | [TOML](examples/in-ca-firm-s01.toml) · [HuML](examples/in-ca-firm-s01.huml) | [CA walkthrough](examples/in-ca-firm.md) |
+| Sharma Advisory LLP, system `S02` | [TOML](examples/in-ca-firm-s02.toml) · [HuML](examples/in-ca-firm-s02.huml) | [CA walkthrough](examples/in-ca-firm.md) |
 
-The generic ten remain unprefixed. The S01/S02 files are full entity-bound copies
-of the CA tree, not fragments or inherited overlays. Read the normative
-[Suchi taxonomy v1 reference](taxonomy-spec.md) for exact fields, limits, JD adaptations,
-import behavior and access boundaries. The researched
-[multi-system use cases](examples/multi-system-use-cases.md) distinguish legal
+The `S01`/`S02` files are complete copies of the CA tree bound to a filing
+system, not fragments or inherited overlays. The generic ten carry no system
+header. Organization names and category addresses in the walkthroughs are
+illustrative, not endorsements.
+
+The [multi-system use cases](examples/multi-system-use-cases.md) separate legal
 recordkeeping facts from illustrative filing choices, with a nearby non-case for
-each. Organization names and document addresses in walkthroughs are illustrative,
-not endorsements or allocated-ID promises.
+each.
 
-The [five core built-ins](https://github.com/johnnybravo-xyz/suchi/tree/main/core/jd/presets)
-remain maintained in Suchi; they are not duplicated here.
+Suchi's [five built-in trees](https://github.com/johnnybravo-xyz/suchi/tree/main/core/jd/presets)
+are maintained in Suchi and are not duplicated here.
 
-## Validate and use
+## Validate
 
-Use a Suchi binary that includes the `taxonomy` command.
-Validation runs offline without server config, data-directory or database creation.
+You need a `suchi` binary that includes the `taxonomy` command. Validation runs
+offline and creates no config, data directory or database.
 
 ```sh
 make check SUCHI_BIN=/absolute/path/to/suchi
-/absolute/path/to/suchi taxonomy import examples/uk-landlord.huml
-/absolute/path/to/suchi taxonomy import examples/uk-landlord.huml --apply
 ```
 
-`SUCHI_BIN` is mandatory, including in CI; Make never downloads or builds a binary
-or falls back to an installed `suchi`. Its discovery covers all 24 authoring files,
-stopping on failure. Record the tested binary revision and results with a review;
-success checks structure, not domain correctness. All TOML counterparts were
-generated through Suchi's actual core `presetfile.Parse`/`Marshal`; there is no
-repository-local parser. Integration must compare each pair through the core
-parser, not byte hashes: serialization and source-provenance hashes may differ.
+`SUCHI_BIN` is required, including in CI. Make never downloads or builds a
+binary, and never falls back to a `suchi` on `PATH`. It validates all 24 files
+and stops at the first failure. Passing checks structure only, not domain
+correctness; record the binary revision you tested with any review.
 
-Preview imports in setup or Settings before applying. Use correspondents for
-growing clients, properties, donors, members and family members. Suchi generates
-`40 System / 49 Inbox` and the separate `00.00 archive.huml` filing map: never
-declare reserved areas, `inbox`, or category-level protected `system` flags.
-The optional **top-level** `system = "S01"` header is valid and has a different
-meaning. First prefixed import atomically names the original archive by default;
-its preview also offers preserving the original under a distinct code and creating
-the incoming system separately. No enable toggle or later opt-out is needed.
+There is no repository-local parser. The TOML files are Suchi's own
+`presetfile.Marshal` output. The HuML files are written by hand for readability
+and start with `%HUML v0.2.0`, so a parser for a different HuML version rejects
+them instead of misreading them. Compare a pair by parsing both through Suchi,
+not by byte hash.
 
-Later prefixed imports target their code; an unprefixed import never disables
-systems. New systems initially admit only instance admins. Grant direct system
-membership separately from document permissions: neither replaces the other.
-Codes are immutable, display names editable. SYS is application access isolation
-on a shared server, not independent infrastructure or proof of audit independence.
-Later imports merge rather than reset, and existing local/disabled rules survive.
-Index/path refresh work can remain queued until processed. The generated tree map
-is not an authoring-starter backup, document inventory or full backup.
+The files carry no keywords or automations. Since Suchi 0.3.0, filing trees
+describe structure only; write matching rules in Suchi's Automations page.
 
-## Authoring changes
+## Import
 
-Use the normative [reference](taxonomy-spec.md) alongside the
-[core authoring guide](https://github.com/johnnybravo-xyz/suchi/blob/main/docs/jd.mdx).
-Retain category codes for their existing document kinds within an ID; bump content
-revision for edited reference content. Flat authoring is shorthand, distinct from
-runtime flat rendering, and list reordering can change codes. Never add unsupported
-fields or runtime document IDs. A full address such as `S01.13.147` uses an
-already-returned installation-global document ID, not a category-local counter.
-New v1-compatible examples and translations do not need a new schema; new portable
-capabilities do. Future packs, signatures/key rotation and managed upgrades are
-separate work, not prerequisites for these static files.
+Preview first, then apply. Import from the CLI, from first-run setup, or from
+Settings in the web app:
 
-Each contribution must include meaningful descriptions, restrained distinctive
-keywords, supported starters only when useful, source links, omissions and an
-honest review status. Do not infer practitioner endorsement from passing validation.
+```sh
+suchi taxonomy import examples/uk-landlord.toml           # preview only
+suchi taxonomy import examples/uk-landlord.toml --apply
+```
+
+What to expect:
+
+- **Imports merge.** Applying a tree adds to existing local state; it does not
+  reset it. Imports never create, change or remove automations.
+- **Suchi owns the system area.** It generates `40 System / 49 Inbox` and the
+  separate `00.00 archive.huml` filing map. Never declare reserved areas,
+  `inbox`, or category-level `system` flags.
+- **Use correspondents for growing lists.** Clients, properties, donors, members
+  and family members belong in correspondents, not in new categories.
+- **Index and path refreshes are queued** and can take a moment to finish after
+  Apply. The generated filing map is not a document inventory or backup.
+
+### Multiple filing systems
+
+The optional top-level `system = "S01"` header binds a tree to a filing system;
+it is unrelated to the category-level flag above.
+
+- The first prefixed import names the original archive after that system by
+  default. Its preview also offers keeping the original under a different code
+  and creating the incoming system separately.
+- Later prefixed imports target their own code. An unprefixed import never
+  disables systems.
+- New systems admit only instance admins at first. Grant system membership
+  separately from document permissions; neither replaces the other.
+- Codes are permanent; display names are editable.
+- Systems isolate application access on one shared server. They are not
+  separate infrastructure or proof of audit independence.
+
+## Authoring
+
+Read the normative [Suchi taxonomy v1 reference](taxonomy-spec.md) together with Suchi's
+[filing systems guide](https://github.com/johnnybravo-xyz/suchi/blob/main/docs/jd.mdx).
+
+- Keep each category code on the same document kind within an `id`; bump
+  `version` when you edit reference content.
+- Reordering a flat list can renumber codes. Flat authoring is shorthand and is
+  unrelated to flat rendering at runtime.
+- Never add unsupported fields or runtime document IDs.
+- Filing addresses locate a category: `AREA.AC` before systems are introduced,
+  `SYS.AC` afterwards. Many documents share an address; the document ID is
+  separate and installation-global.
+- New examples and translations fit v1 as-is. New portable capabilities need a
+  new schema version.
+
+Each contribution needs meaningful descriptions, source links, known omissions
+and an honest review status. Passing validation does not imply practitioner
+endorsement.
 
 ## Licence
 
-Reference files, notes and supporting repository content are dedicated under
-[CC0-1.0](LICENSE). Linked official source material and Suchi core code retain
-their own licences. No trademark rights or domain warranties are granted.
+Reference files, notes and supporting content are dedicated under
+[CC0-1.0](LICENSE). Linked source material and Suchi itself keep their own
+licences. No trademark rights or domain warranties are granted.
+
+Johnny.Decimal is a trademark of Coruscade Pty Ltd. Suchi is independent and not
+affiliated with or endorsed by Johnny.Decimal.

@@ -1,3 +1,4 @@
+%HUML v0.2.0
 format: "suchi-taxonomy/v1"
 id: "us-small-landlord"
 version: 1
@@ -16,17 +17,14 @@ areas::
         code: 11
         name: "Deeds and mortgage"
         description: "Recorded deeds, closing statements and mortgage records."
-        keywords:: "warranty deed", "mortgage statement"
       - ::
         code: 12
         name: "Insurance"
         description: "Policy schedules, declarations and claim correspondence."
-        keywords:: "insurance declarations", "dwelling policy"
       - ::
         code: 13
         name: "Inspections and repairs"
         description: "Move-in condition reports, inspections and repair invoices."
-        keywords:: "move-in inspection", "repair work order"
   - ::
     code: 20
     name: "Tenancy records"
@@ -35,19 +33,14 @@ areas::
         code: 21
         name: "Leases"
         description: "Executed rental agreements and amendments."
-        keywords::
-          - "residential lease agreement"
       - ::
         code: 22
         name: "Deposits"
         description: "Deposit receipts, accounting statements and return evidence."
-        keywords::
-          - "security deposit accounting"
       - ::
         code: 23
         name: "Notices"
         description: "Served tenancy notices and delivery evidence."
-        keywords:: "notice to vacate", "notice of rent increase"
   - ::
     code: 30
     name: "Rental money"
@@ -56,9 +49,7 @@ areas::
         code: 31
         name: "Rent ledgers"
         description: "Rental receipts, ledgers and property-manager statements."
-        keywords:: "rent ledger", "owner distribution statement"
       - ::
         code: 32
         name: "Tax records"
         description: "Schedule E, information returns and supporting tax computations."
-        keywords:: "Schedule E", "Form 1099-MISC"

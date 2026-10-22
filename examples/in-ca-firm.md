@@ -11,22 +11,21 @@ Keep client returns, audit working papers and signed engagements separate from t
 
 ## Scope and omissions
 
-Includes ROC/secretarial filings, certificates/UDIN and peer review. Practice tax has no keyword rule: the same phrases occur in client returns, so identify these documents manually. No tax calculation, portal filing, engagement access control or statutory audit checklist.
+Includes ROC/secretarial filings, certificates/UDIN and peer review. Practice tax shares its phrases with client returns, so file it by hand rather than with a text-matching rule. No tax calculation, portal filing, engagement access control or statutory audit checklist.
 
-All categories have document-kind descriptions. Keywords are literal starter
-phrases, not measured classification accuracy; review false matches before use.
-No explicit automation seeds: category keywords provide the limited starters.
-Sensitivity defaults, review cadences, custom fields, standalone seed families,
-links and trust/access state are intentionally absent because taxonomy v1 does
-not support them. Configure permissions independently before adding real records.
+All categories have document-kind descriptions. The tree carries no keywords
+or automations; write your own matching rules in Suchi's Automations page and
+check what they catch before relying on them. Sensitivity defaults, review
+cadences, custom fields, links and trust/access state are left out because
+taxonomy v1 doesn't support them. Configure permissions independently before adding real records.
 
 ## Sharma audit/advisory walkthrough
 
 The firms, people and staffing arrangement below are **illustrative**, not facts
 about real firms. Posit one audit practice, Sharma & Associates, and a separately
 managed advisory practice, Sharma Advisory LLP, using one trusted Suchi server.
-The two files repeat the complete generic CA tree verbatim, including descriptions
-and keywords; only their system/content identity and display-name headers differ.
+The two files repeat the complete generic CA tree verbatim, including descriptions;
+only their system/content identity and display-name headers differ.
 They do not add an audit-independence model, inheritance or a new classification
 scheme. No Indian professional/legal conclusion follows from this organization.
 Assess actual engagement, confidentiality and independence requirements separately.
@@ -61,8 +60,8 @@ Original archive (no displayed SYS)
 
 Use client correspondents such as **Sharma Traders** and **Mehta Manufacturing**,
 not a new category or system for every client/year. A client's GST return belongs
-in 13; the practice's own return belongs in 22. The deliberately absent practice-tax
-keyword avoids confusing the same phrases in client filings with the firm's tax.
+in 13; the practice's own return belongs in 22. If you write rules, leave
+practice tax out of them: the same phrases appear in client filings.
 Correspondents in two systems can have the same name without being one shared row.
 
 ### 2. Introduce S01 through the normal import
@@ -86,16 +85,13 @@ Apply must not partly name/create a system. In the CLI the separate choice is
 For example, the ordinary adoption path is preview then Apply:
 
 ```sh
-/absolute/path/to/suchi taxonomy import examples/in-ca-firm-s01.huml
-/absolute/path/to/suchi taxonomy import examples/in-ca-firm-s01.huml --apply
+suchi taxonomy import examples/in-ca-firm-s01.toml
+suchi taxonomy import examples/in-ca-firm-s01.toml --apply
 ```
 
-For an already imported generic tree, ordinary same-code/name merge preserves
-local rows/descriptions and rules. These entity-bound files have distinct content
-IDs, so keyword-rule names are distinct from generic-file names. If the existing
-generic starters are already sufficient, choose `--skip-seeds` (or the import
-preview's starter choice) to avoid adding another equivalent set; skipping
-starters never relaxes file validation.
+For an already imported generic tree, the ordinary same-code/name merge keeps
+local rows and descriptions. Imports never touch automations, so the rules you
+wrote for the original archive stay with it when it becomes S01.
 
 ### 3. Add S02 and then grant entry
 
@@ -141,25 +137,26 @@ Review them before adding real records. Membership grants entry, not a blanket
 right to every document; importing a tree grants no ordinary user access to a new
 system. No per-system role hierarchy is needed.
 
-### 4. File documents using IDs actually returned by Suchi
+### 4. Keep filing category addresses separate from document identity
 
-The following numbers are **illustrative receipts**, not promises of future
-allocation: assume Suchi has already returned document IDs **147** and **148**.
-Substitute real upload/detail IDs when following the walkthrough. Neither file
-authors these numbers, and they are not local folder counters.
+Assume Suchi has returned numeric document IDs **147** and **148**. Those IDs
+remain the exact API/detail identities and are not authored by either taxonomy:
 
-- A Sharma Traders GST return in S01/category 13 has address **S01.13.147**.
-- A distinct advisory-system GST document in S02/category 13 has address
-  **S02.13.148**. The client name can recur there as S02's own correspondent.
+- A Sharma Traders GST return in S01/category 13 projects **S01.13**.
+- A distinct advisory-system GST document in S02/category 13 projects **S02.13**.
+  The client name can recur there as S02's own correspondent.
+- Another S01/category 13 document also projects **S01.13** while retaining its
+  own numeric document ID.
 - If document 147 was actually audit evidence and is corrected within S01 to
-  category 14, its address becomes **S01.14.147**. Its numeric identity stays 147;
-  the former full address is stale. Its existing numeric document link remains
-  an authorized route to the current location.
+  category 14, its projection becomes **S01.14** while its numeric identity stays
+  147. **S01.13** still resolves category 13; it is not a stale alias for document
+  147.
 
-The final component is the positive installation-global `documents.id`, not
-`.01` through `.99` allocated anew in each category. New versions and split
-children receive their own document IDs. Document assignment cannot move 147 to
-S02; membership in both systems does not make a foreign category ID a valid target.
+The two-component filing address identifies a category, not a document or a
+category-local `.01` through `.99` counter. New versions and split children
+receive their own installation-global document IDs. Document assignment cannot
+move 147 to S02; membership in both systems does not make a foreign category ID
+a valid target.
 
 ### 5. Demonstrate the two permission gates
 
@@ -187,7 +184,7 @@ First introduction queues render-only moves and per-system index refreshes; it
 does not rerun extraction, classification or automations. Queue completion and
 actual filesystem publication are separate from successful import.
 
-Illustrative default paths, using the already-returned IDs above:
+Illustrative default paths, using the independent document IDs above:
 
 ```text
 Before SYS:
@@ -197,22 +194,22 @@ Before SYS:
 After SYS:
   rendered/S01/00-09 System index/00.00 archive.huml
   rendered/S01/10-19 Client document kinds/13 GST filings/2026/
-    2026-07-31 GST return__S01.13.147.pdf
+    2026-07-31 GST return__147.pdf
   rendered/S02/00-09 System index/00.00 archive.huml
   rendered/S02/10-19 Client document kinds/13 GST filings/2026/
-    2026-07-31 GST return__S02.13.148.pdf
+    2026-07-31 GST return__148.pdf
 ```
 
 This path sketch precedes the optional refile to category 14. System roots use
 codes only, so renaming the firm label does not move all documents. The generated
 `00.00 archive.huml` is a managed area/category map, with current system name and
 snapshot identity `archive`/revision 1. It is not the original CA authoring file,
-the last-import provenance record, a keyword/starter backup or a document inventory.
+the last-import provenance record, an automation backup or a document inventory.
 Only proved-managed old index/link artifacts are cleaned up during projection;
 an unknown user file is not safe to overwrite.
 
-Keep the reference authoring files separately if you need their descriptions,
-keywords and source identity. A taxonomy export is current portable configuration,
+Keep the reference authoring files separately if you need their descriptions
+and source identity. A taxonomy export is current portable configuration,
 and a native takeout is a partial selected-system export whose reimport can allocate
 new IDs. Preserve IDs, memberships, document ACLs, relationships and credentials
 through a consistent **full database + blobs + credential key + configuration**
